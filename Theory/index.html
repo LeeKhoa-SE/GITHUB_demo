@@ -1,0 +1,61 @@
+<!DO name="check" TYPE html>
+<html>
+    <!--
+        1. h1 - h6 - heading
+        2. p - paragraph
+        3. img - ảnh
+        4. a - anchor (đặt liên kết)
+        5. ul, li - unordered list, list item -(danh sách mỗi ul sẽ chứa nhiều li)
+        6. table - bảng
+        7. Inputme  checkButton-tạo nút
+        9. div- tạo khối để bao quanh nội dung  -->
+    <!-- Phần đầu -->
+    <head>
+        <title> F8-shop</title>
+        <meta charset="utf-8">
+    </head>
+    <!-- Phần thân -->
+    <body>
+        <div>
+            <h1>Hồ sơ xin việc</h1>
+            <p>Xin làm công việc viết code</p>
+            <button>đăng ký</button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/1024px-NVIDIA_logo.svg.png" alt="CÔng ty NVIDIAIA">
+            
+            <ul>
+                <li>Thành thaoh ngôn ngữ C++, HTML, CSS, javascript</li>
+                <li>Kỹ năng làm việc nhóm</li>
+            </ul>
+
+            <table>
+                <thead>   <!--thead nghĩa là table head- phần đầu của bảng-->  
+                    <!-- th nghĩa là table heading - tiêu đề của bảng -->
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Năm sinh</th>
+                </thead>
+
+                <tbody>     <!--tbody nghĩa là table body - phân thân của bảng-->
+                    <!-- tr nghĩa là table row - hàng -->
+                    <tr>
+                        <!-- td là table data - ô, và phải tương ứng với table heading  -->
+                        <td>33</td>
+                        <td>Lê Phước Anh Khoa</td>
+                        <td>10/02/2006</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Le Mai Ngoc Anh</td>
+                        <td>16/07/2015</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- tạo đầu vào  ví dụ như chọn đáp án. checkbox (ô vuông), radio ( tròn) -->
+            <!-- để chỉ chọn 1 trong số đó thôi thì phải đặt cùng tên -->
+            <input name="check" type="radio">
+            <input name="check" type="radio">
+            <input name="check" type="radio">
+        </div>
+    </body>
+</html>
