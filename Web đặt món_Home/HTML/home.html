@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../CSS/home_style.css">
+</head>
+
+<body>
+    <div id="container">
+
+        <nav class="navbar navbar-expand-sm sticky-top">
+            <div class="container">
+
+                <div>
+                    <img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web">
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" aria-current="page">Trang Chủ
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="#">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="#">Tới Lấy</a>
+                                <a class="dropdown-item" href="#">Giao Hàng</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><a href=""><img src="../IMG/HomePage/user.png" alt=""></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <header>
+            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="../IMG/HomePage/banner1.jpg" class="w-100d-block" alt="First slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../IMG/HomePage/banner2.jpg" class="w-100d-block" alt="Second slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../IMG/HomePage/banner3.jpg" class="w-100d-block" alt="Third slide" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </header>
+
+
+
+        <!-- Modal trigger button -->
+
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="menu.html" class="btn btn-primary w-100 mb-2">🚚 Giao Hàng</a>
+                        <a href="menu.html" class="btn btn-success w-100 mb-2">🛍 Tới Lấy</a>
+                        <a href="menu.html" class="btn btn-warning w-100 mb-2">🍽 Ăn Tại Chỗ</a>
+                        <a href="menu.html" class="btn btn-danger w-100 mb-2">🎉 Đặt Tiệc</a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(
+                document.getElementById("modalId"),
+                options,
+            );
+        </script>
+
+        <section>
+            <div class="container">
+                <h2>Các Món Ăn Được Ưa Thích</h2>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comtam.jpg" alt="Cơm Tấm" />
+                            <div class="card-body">
+                                <h4 class="card-title">Cơm tấm sườn bì chả</h4>
+                                <p class="card-text">55.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/bunbo.jpg" alt="Bún Bò" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bún bò huế</h4>
+                                <p class="card-text">60.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/hutieu.webp" alt="Hủ Tiếu" />
+                            <div class="card-body">
+                                <h4 class="card-title">Hủ tiếu nam vang</h4>
+                                <p class="card-text">55.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/pho.webp" alt="Phở" />
+                            <div class="card-body">
+                                <h4 class="card-title">Phở Hà Nội</h4>
+                                <p class="card-text">55.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/banhmi.jpg" alt="Bánh Mì" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bánh Mì</h4>
+                                <p class="card-text">25.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/bundaumamtom.webp" alt="Bún Đậu Mắm Tôm" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bún Đậu Mắm Tôm</h4>
+                                <p class="card-text">80.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2>Combo Ưu Đãi</h2>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comboBanhmiCaPhe.jpg"
+                                alt="Bánh Mì và Cà Phê Sữa" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bánh Mì + Cà Phê Sữa</h4>
+                                <p class="card-text">35.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/image (4).jpg"
+                                alt="Bún Đậu Mắm Tôm và Trà Tắc" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bún Đậu Mắm Tôm + Trà Tắc</h4>
+                                <p class="card-text">85.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comboComtam.jpg"
+                                alt="Cơm Tấm và Trà Đào Cam Sả" />
+                            <div class="card-body">
+                                <h4 class="card-title">Cơm Tấm + Trà Đào Cam Sả</h4>
+                                <p class="card-text">60.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comboPho.jpg"
+                                alt="Phở, Bánh Quẩy và Trà Tắc" />
+                            <div class="card-body">
+                                <h4 class="card-title">Phở Hà Nội + Bánh Quẩy + Trà Tắc</h4>
+                                <p class="card-text">60.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comboBanhmi.jpg"
+                                alt="2 Bánh Mì và Trà Tắc" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bánh Mì x 2 + Trà Tắc</h4>
+                                <p class="card-text">50.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../IMG/HomePage/comboBundaumamtom.jpg"
+                                alt="Bún Đậu Mắm Tôm và Nước Ngọt" />
+                            <div class="card-body">
+                                <h4 class="card-title">Bún Đậu Mắm Tôm + 1 Nước Ngọt</h4>
+                                <p class="card-text">85.000đ</p>
+                                <input type="button" value="Đặt Món" class="button-order">
+                                <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h6>Liên kết</h6>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none" href="#">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none" href="#">Discount</a></li>
+                            <li><a class="text-decoration-none" href="#">Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h6>Liên hệ</h6>
+                        <p class="mb-1">📞 0909 123 456</p>
+                        <p class="mb-0">📍 1, Nguyễn Văn Bảo, Phường 14, Quận Gò Vấp, TP.HCM</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>
