@@ -61,8 +61,8 @@ nav {
     object-fit: cover;
 }
 
-.col-md-4 {
-    text-align: center;
+.col-md-4 a {
+    padding-left: 5px;
 }
 
 .card:hover {
@@ -104,8 +104,8 @@ section h2 {
     color: #7d2905;
 }
 
-footer {
-    background-color: #8d5a43;
+.bg-dark {
+    background-color: #643925 !important;
     color: #F5F5F5;
 }
 

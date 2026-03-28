@@ -17,7 +17,9 @@
             <div class="container">
 
                 <div>
-                    <img src="../IMG/MenuPage/image__4_-removebg-preview.png" alt="" id="logo_web">
+                    <a href="home.html">
+                        <img src="../IMG/MenuPage/image__4_-removebg-preview.png" alt="" id="logo_web">
+                    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -157,7 +159,7 @@
                         <div id="mon_an">
                             <div class="row justify-content-center align-items-center g-2">
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card food-card">
                                         <img class="card-img-top" src="../IMG/MenuPage/cu3-1536x1041.jpg" alt="Title" />
                                         <div class="card-body">
                                             <h4 class="card-title">Cơm tấm sườn bì chả</h4>
@@ -169,7 +171,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card food-card">
                                         <img class="card-img-top" src="../IMG/MenuPage/Bún bò poster (case Study).jpg"
                                             alt="Title" />
                                         <div class="card-body">
@@ -182,7 +184,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card food-card">
                                         <img class="card-img-top" src="../IMG/MenuPage/Hu-Tieu-saved-for-web.webp"
                                             alt="Title" />
                                         <div class="card-body">
@@ -197,7 +199,7 @@
 
                                 <div class="row justify-content-center align-items-center g-2">
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img class="card-img-top" src="../IMG/MenuPage/bunrieu.jpg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Bún riêu cua</h4>
@@ -210,7 +212,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img class="card-img-top" src="../IMG/MenuPage/bunca.jpg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Bún cá</h4>
@@ -223,7 +225,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img class="card-img-top" src="../IMG/MenuPage/miquang.jpg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Mì quảng</h4>
@@ -239,7 +241,7 @@
 
                                 <div class="row justify-content-center align-items-center g-2">
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img class="card-img-top" src="../IMG/MenuPage/trada.jpg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Trà đá</h4>
@@ -252,7 +254,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img class="card-img-top" src="../IMG/MenuPage/cocacola.jpeg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Coca-cola</h4>
@@ -265,7 +267,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card">
+                                        <div class="card food-card">
                                             <img img class="card-img-top" src="../IMG/MenuPage/pepsi.jpg" alt="Title" />
                                             <div class="card-body">
                                                 <h4 class="card-title">Pepsi</h4>
@@ -288,32 +290,81 @@
             </table>
         </div>
 
-        <footer class="py-4 mt-5">
-            <div class="container">
+        <!-- script để lấy thông tin từ các thẻ để đưa qua bên trang products -->
+        <script>
+            const cards = document.querySelectorAll(".food-card");
+
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+
+                    const name = card.querySelector(".card-title").innerText;
+                    const price = card.querySelector(".card-text").innerText;
+                    const img = card.querySelector("img").src;
+
+                    const food = {
+                        name: name,
+                        price: price,
+                        img: img
+                    };
+
+                    // Lưu vào localStorage
+                    localStorage.setItem("selectedFood", JSON.stringify(food));
+
+                    // Chuyển trang
+                    window.location.href = "products.html";
+                });
+            });
+        </script>
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
                 <div class="row">
-                    <div class="col-md-4">
+
+                    <!-- Thông tin quán -->
+                    <div class="col-md-3">
                         <h5>Quán Anh 3</h5>
                         <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
                     </div>
 
-                    <div class="col-md-4">
-                        <h6>Liên kết</h6>
+                    <!-- Liên kết -->
+                    <div class="col-md-3">
+                        <h5>Liên kết</h5>
                         <ul class="list-unstyled">
-                            <li><a class="text-decoration-none" href="#">Menu</a></li>
-                            <li><a class="text-decoration-none" href="#">Discount</a></li>
-                            <li><a class="text-decoration-none" href="#">Service</a></li>
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-md-4">
-                        <h6>Liên hệ</h6>
-                        <p class="mb-1">📞 0909 123 456</p>
-                        <p class="mb-0">📍 1, Nguyễn Văn Bảo, Phường 14, Quận Gò Vấp, TP.HCM</p>
+                    <!-- Liên hệ -->
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò
+                            Vấp, TP.HCM</p>
                     </div>
+
+                    <!-- Giờ mở cửa -->
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt="">08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt="">Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+
                 </div>
+
+                <hr class="bg-light">
+
+                <p class="text-center mb-0">
+                    © 2026 Quán Anh 3. All rights reserved.
+                </p>
             </div>
         </footer>
     </div>
+
+
 </body>
 
 </html>

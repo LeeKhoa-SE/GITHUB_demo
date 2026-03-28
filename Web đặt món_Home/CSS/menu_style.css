@@ -108,8 +108,8 @@ section h2 {
     padding: 2px;
 }
 
-footer {
-    background-color: #8d5a43;
+.bg-dark {
+    background-color: #8d5a43 !important;
     color: #F5F5F5;
 }
 

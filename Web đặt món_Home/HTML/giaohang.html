@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao Hàng</title>
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="text-white py-3" style="background-color: #eddac1;">
+        <div class="container d-flex align-items-center">
+            <h5 class="mb-0 mx-auto fw-bold text-uppercase" style="color: #2B1B14;">Giao Hàng</h5>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h6 class="fw-bold mb-4 border-bottom pb-2">1. NHẬP ĐỊA CHỈ & THỜI GIAN</h6>
+
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control border-start-0" placeholder="Nhập địa chỉ nhận hàng...">
+                        <button class="btn btn-outline-primary border-0"><i class="bi bi-geo-alt-fill"></i></button>
+                    </div>
+
+                    <p class="fw-bold small mb-2">Thời gian giao hàng</p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="deliveryTime" id="now" checked>
+                        <label class="form-check-label small" for="now">Giao ngay (30-45 phút)</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="deliveryTime" id="later">
+                        <label class="form-check-label small" for="later">Đặt trước</label>
+                    </div>
+
+                    <div class="row g-2 mb-4">
+                        <div class="col-6">
+                            <select class="form-select form-select-sm">
+                                <option>Ngày 30/03</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-select form-select-sm">
+                                <option>10:00 - 10:30</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn w-100 mt-auto py-2 fw-bold" style="background-color: orange; color: white;">Lưu
+                        địa chỉ</button>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h6 class="fw-bold mb-4 border-bottom pb-2">2. CHỌN MÓN ĂN</h6>
+
+                    <div class="row g-3 overflow-auto" style="max-height: 500px;">
+                        <div class="col-6">
+                            <div class="card border p-2 h-100 shadow-sm">
+                                <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
+                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                <div class="small fw-bold text-truncate">Phở Bò Tái</div>
+                                <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border p-2 h-100 shadow-sm">
+                                <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg"
+                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                <div class="small fw-bold text-truncate">Cơm Tấm Sườn Bì Chả</div>
+                                <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border p-2 h-100 shadow-sm">
+                                <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
+                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                <div class="small fw-bold text-truncate">Bún Bò Huế</div>
+                                <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border p-2 h-100 shadow-sm">
+                                <img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
+                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                <div class="small fw-bold text-truncate">Hủ Tiếu</div>
+                                <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h6 class="fw-bold mb-4 border-bottom pb-2">3. GIỎ HÀNG</h6>
+
+                    <div class="flex-grow-1 overflow-auto mb-4" style="max-height: 300px;">
+                        <div class="d-flex align-items-center mb-3 border-bottom pb-2">
+                            <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg" class="rounded me-2"
+                                width="50" height="50">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold" style="font-size: 0.8rem;">Cơm Tấm Sườn Bì Chả</div>
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-light border">-</button>
+                                        <span class="px-2">1</span>
+                                        <button class="btn btn-light border">+</button>
+                                    </div>
+                                    <span class="small fw-bold">75.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top pt-3">
+                        <div class="d-flex justify-content-between mb-1 small">
+                            <span>Tạm tính:</span>
+                            <span>75.000đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 small text-danger">
+                            <span>Phí vận chuyển:</span>
+                            <span>15.000đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                            <span>Tổng:</span>
+                            <span class="text-success">90.000đ</span>
+                        </div>
+                        <a href="checkout.html"><button class="btn w-100 mt-auto py-2 fw-bold"
+                                style="background-color: orange; color: white;">
+                                THANH TOÁN
+                            </button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/home_style.css">
+    <link rel="stylesheet" href="../CSS/products_style.css">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div id="container">
+
+        <nav class="navbar navbar-expand-sm sticky-top">
+            <div class="container">
+
+                <div>
+                    <a href="home.html"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="#">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="#">Tới Lấy</a>
+                                <a class="dropdown-item" href="#">Giao Hàng</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><a href=""><img src="../IMG/HomePage/user.png" alt=""></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal trigger button -->
+
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="menu.html" class="btn btn-primary w-100 mb-2">🚚 Giao Hàng</a>
+                        <a href="menu.html" class="btn btn-success w-100 mb-2">🛍 Tới Lấy</a>
+                        <a href="menu.html" class="btn btn-warning w-100 mb-2">🍽 Ăn Tại Chỗ</a>
+                        <a href="menu.html" class="btn btn-danger w-100 mb-2">🎉 Đặt Tiệc</a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(
+                document.getElementById("modalId"),
+                options,
+            );
+        </script>
+
+        <section>
+            <div id="container_section">
+                <div id="section_img">
+                    <img id="img">
+                </div>
+                <div id="section_border">
+                    <div id="section_content">
+                        <h3 id="name"></h3>
+                        <p id="price" style="font-size: 20px;text-align: center;"></p>
+                        <label for="" style="font-weight: bold;">Ghi Chú: </label>
+                        <input type="text" name="" id="" style="border-radius: 10px;height: 30px;">
+                        <a href="">
+                            <button id="btnAddCart">Thêm vào giỏ hàng</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            const food = JSON.parse(localStorage.getItem("selectedFood"));
+
+            if (food) {
+                document.getElementById("name").innerText = food.name;
+                document.getElementById("price").innerText = food.price;
+                document.getElementById("img").src = food.img;
+            } else {
+                document.body.innerHTML = "Không có dữ liệu!";
+            }
+        </script>
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
+                <div class="row">
+
+                    <!-- Thông tin quán -->
+                    <div class="col-md-3">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                    </div>
+
+                    <!-- Liên kết -->
+                    <div class="col-md-3">
+                        <h5>Liên kết</h5>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Liên hệ -->
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò
+                            Vấp, TP.HCM</p>
+                    </div>
+
+                    <!-- Giờ mở cửa -->
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt="">08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt="">Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+
+                </div>
+
+                <hr class="bg-light">
+
+                <p class="text-center mb-0">
+                    © 2026 Quán Anh 3. All rights reserved.
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>

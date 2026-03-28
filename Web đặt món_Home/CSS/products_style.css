@@ -1,0 +1,49 @@
+#container_section {
+    width: 80%;
+    text-align: center;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 300px;
+}
+
+#section_img {
+    width: 30%;
+    height: 250px;
+}
+
+#section_img img {
+    width: 100%;
+    border-radius: 30px;
+    height: 100%;
+}
+
+#section_border {
+    width: 30%;
+    border-radius: 30px;
+    height: 250px;
+    box-shadow: 0 5px 30px burlywood;
+}
+
+#section_content {
+    width: 80%;
+    margin: auto;
+    height: 70%;
+    margin-top: 20px;
+}
+
+#btnAddCart {
+    border-radius: 10px;
+    width: 90%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(255, 192, 98);
+    margin-top: 20px;
+}
+
+#btnAddCart:hover {
+    transform: translateY(-5px);
+}
