@@ -45,10 +45,8 @@ nav {
 }
 
 .nav-item:hover {
-    text-decoration: underline;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 
 .modal-body {
@@ -59,6 +57,8 @@ nav {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-start-start-radius: 50px;
+    border-top-right-radius: 50px;
 }
 
 .col-md-4 a {
@@ -133,6 +133,10 @@ footer a {
     transform: translateY(-5px);
 }
 
+#user {
+    margin-right: 30px;
+}
+
 #user li {
     list-style: none;
     float: left;
@@ -145,4 +149,43 @@ footer a {
 
 #user li:hover {
     transform: translateY(-5px);
+}
+
+.card {
+    text-align: center;
+    border-radius: 50px;
+}
+
+#introWeb {
+    width: 90%;
+    margin: auto;
+    height: 400px;
+    border: 2px solid black;
+    background-image: url(../IMG/HomePage/backgroundIntro.png);
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    border-radius: 50px;
+}
+
+#introWeb li {
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    padding-top: 23px;
+    width: 90%;
+    margin: auto;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+#introWeb img {
+    width: 25px;
+}
+
+.hrSection {
+    border: none;
+    height: 5px;
+    background-color: #391200;
 }
