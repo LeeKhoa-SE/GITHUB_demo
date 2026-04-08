@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
     <script src="../JS/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../CSS/menu_style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body>
@@ -44,11 +45,23 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="#">Đặt Tiệc</a>
                                 <a class="dropdown-item" href="#">Tới Lấy</a>
-                                <a class="dropdown-item" href="#">Giao Hàng</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
                                 <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
                             </div>
                         </li>
                     </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
                     <div class="ms-auto">
                         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -61,7 +74,8 @@
                             <ul>
                                 <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
                                 <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
-                                <li><a href=""><img src="../IMG/HomePage/user.png" alt=""></a></li>
+                                <li><img src="../IMG/HomePage/user.png" alt="" data-bs-toggle="modal"
+                                        data-bs-target="#authModal"></li>
                             </ul>
                         </div>
 
@@ -71,11 +85,65 @@
             </div>
         </nav>
 
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" placeholder="Tên Đăng Nhập">
+                        <input type="password" class="form-control mb-2" placeholder="Mật khẩu">
+                        <button class="btn btn-primary w-100">Đăng nhập</button>
+
+                        <p class="text-center mt-2">
+                            Chưa có tài khoản?
+                            <a href="#">Đăng ký</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <!-- Button trigger modal -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="giaohang.html">
+                            <button class="btn btn-primary w-100 mb-2"> 🚚 Giao Hàng </button>
+                        </a>
+                        <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">
+                            🛍 TớiLấy
+                        </button>
+                        <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
+                        <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!-- Modal -->
-        <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        <div class="modal fade" id="modalIdAddCart" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -86,8 +154,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">Chọn số lượng:</div>
-                        <input type="range" class="form-range" id="customRange1">
+                        <div class="text-center">
+                            <img id="modalImg" style="width: 100%; max-height:150px; object-fit:cover;">
+                            <h5 id="modalName"></h5>
+                            <p id="modalPrice"></p>
+                        </div>
+
+                        <label>Số lượng:</label>
+                        <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+                            <button class="btn btn-outline-secondary" id="minusBtn">-</button>
+
+                            <input type="text" id="quantity" value="1" style="width:60px; text-align:center;" readonly>
+
+                            <button class="btn btn-outline-secondary" id="plusBtn">+</button>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -100,17 +180,48 @@
         </div>
 
         <script>
-            var modalId = document.getElementById('modalId');
+            const quantityInput = document.getElementById("quantity");
+            const plusBtn = document.getElementById("plusBtn");
+            const minusBtn = document.getElementById("minusBtn");
+
+            function updateButtons() {
+                minusBtn.disabled = parseInt(quantityInput.value) <= 1;
+            }
+
+            plusBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                quantityInput.value = value + 1;
+                updateButtons();
+            });
+
+            minusBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                    updateButtons();
+                }
+            });
+
+            updateButtons();
+        </script>
+
+
+
+
+        <script>
+            var modalId = document.getElementById('modalIdAddCart');
 
             modalId.addEventListener('show.bs.modal', function (event) {
+                document.getElementById("quantity").value = 1;
+                updateButtons();
                 // Button that triggered the modal
                 let button = event.relatedTarget;
                 // Extract info from data-bs-* attributes
                 let recipient = button.getAttribute('data-bs-whatever');
-
-                // Use above variables to manipulate the DOM
             });
         </script>
+
+
 
 
         <div id="menu">
@@ -158,132 +269,275 @@
                     <td>
                         <div id="mon_an">
                             <div class="row justify-content-center align-items-center g-2">
-                                <div class="col">
-                                    <div class="card food-card">
-                                        <img class="card-img-top" src="../IMG/MenuPage/cu3-1536x1041.jpg" alt="Title" />
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmiCaPhe.jpg"
+                                            alt="Bánh Mì và Cà Phê Sữa" />
                                         <div class="card-body">
-                                            <h4 class="card-title">Cơm tấm sườn bì chả</h4>
-                                            <p class="card-text">55.000đ</p>
-                                            <input type="button" value="Đặt Món" class="card-order">
-                                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                                                data-bs-target="#modalId">Thêm Vào Giỏ</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card food-card">
-                                        <img class="card-img-top" src="../IMG/MenuPage/Bún bò poster (case Study).jpg"
-                                            alt="Title" />
-                                        <div class="card-body">
-                                            <h4 class="card-title">Bún bò huế</h4>
-                                            <p class="card-text">65.000đ</p>
-                                            <input type="button" value="Đặt Món" class="card-order">
-                                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                                                data-bs-target="#modalId">Thêm Vào Giỏ</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card food-card">
-                                        <img class="card-img-top" src="../IMG/MenuPage/Hu-Tieu-saved-for-web.webp"
-                                            alt="Title" />
-                                        <div class="card-body">
-                                            <h4 class="card-title">Hủ tiếu nam vang</h4>
-                                            <p class="card-text">55.000đ</p>
-                                            <input type="button" value="Đặt Món" class="card-order">
-                                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                                                data-bs-target="#modalId">Thêm Vào Giỏ</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-center align-items-center g-2">
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img class="card-img-top" src="../IMG/MenuPage/bunrieu.jpg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Bún riêu cua</h4>
-                                                <p class="card-text">40.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img class="card-img-top" src="../IMG/MenuPage/bunca.jpg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Bún cá</h4>
-                                                <p class="card-text">40.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img class="card-img-top" src="../IMG/MenuPage/miquang.jpg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Mì quảng</h4>
-                                                <p class="card-text">45.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-center align-items-center g-2">
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img class="card-img-top" src="../IMG/MenuPage/trada.jpg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Trà đá</h4>
-                                                <p class="card-text">10.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img class="card-img-top" src="../IMG/MenuPage/cocacola.jpeg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Coca-cola</h4>
-                                                <p class="card-text">15.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card food-card">
-                                            <img img class="card-img-top" src="../IMG/MenuPage/pepsi.jpg" alt="Title" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">Pepsi</h4>
-                                                <p class="card-text">15.000đ</p>
-                                                <input type="button" value="Đặt Món" class="card-order">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    data-bs-toggle="modal" data-bs-target="#modalId">Thêm Vào
-                                                    Giỏ</button>
-                                            </div>
+                                            <h4 class="card-title">Bánh Mì + Cà Phê Sữa</h4>
+                                            <p class="card-text">35.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
                                         </div>
                                     </div>
 
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/image (4).jpg"
+                                            alt="Bún Đậu Mắm Tôm và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + Trà Tắc</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboComtam.jpg"
+                                            alt="Cơm Tấm và Trà Đào Cam Sả" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Cơm Tấm + Trà Đào Cam Sả</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboPho.jpg"
+                                            alt="Phở, Bánh Quẩy và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Phở Hà Nội + Bánh Quẩy + Trà Tắc</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmi.jpg"
+                                            alt="2 Bánh Mì và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bánh Mì x 2 + Trà Tắc</h4>
+                                            <p class="card-text">50.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBundaumamtom.jpg"
+                                            alt="Bún Đậu Mắm Tôm và Nước Ngọt" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + 1 Nước Ngọt</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
 
+                            <div class="row justify-content-center align-items-center g-2">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmiCaPhe.jpg"
+                                            alt="Bánh Mì và Cà Phê Sữa" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bánh Mì + Cà Phê Sữa</h4>
+                                            <p class="card-text">35.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/image (4).jpg"
+                                            alt="Bún Đậu Mắm Tôm và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + Trà Tắc</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboComtam.jpg"
+                                            alt="Cơm Tấm và Trà Đào Cam Sả" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Cơm Tấm + Trà Đào Cam Sả</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboPho.jpg"
+                                            alt="Phở, Bánh Quẩy và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Phở Hà Nội + Bánh Quẩy + Trà Tắc</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmi.jpg"
+                                            alt="2 Bánh Mì và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bánh Mì x 2 + Trà Tắc</h4>
+                                            <p class="card-text">50.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBundaumamtom.jpg"
+                                            alt="Bún Đậu Mắm Tôm và Nước Ngọt" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + 1 Nước Ngọt</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center align-items-center g-2">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmiCaPhe.jpg"
+                                            alt="Bánh Mì và Cà Phê Sữa" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bánh Mì + Cà Phê Sữa</h4>
+                                            <p class="card-text">35.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/image (4).jpg"
+                                            alt="Bún Đậu Mắm Tôm và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + Trà Tắc</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboComtam.jpg"
+                                            alt="Cơm Tấm và Trà Đào Cam Sả" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Cơm Tấm + Trà Đào Cam Sả</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboPho.jpg"
+                                            alt="Phở, Bánh Quẩy và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Phở Hà Nội + Bánh Quẩy + Trà Tắc</h4>
+                                            <p class="card-text">60.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBanhmi.jpg"
+                                            alt="2 Bánh Mì và Trà Tắc" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bánh Mì x 2 + Trà Tắc</h4>
+                                            <p class="card-text">50.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="card">
+                                        <img class="card-img-top food-card" src="../IMG/HomePage/comboBundaumamtom.jpg"
+                                            alt="Bún Đậu Mắm Tôm và Nước Ngọt" />
+                                        <div class="card-body">
+                                            <h4 class="card-title">Bún Đậu Mắm Tôm + 1 Nước Ngọt</h4>
+                                            <p class="card-text">85.000đ</p>
+                                            <input type="button" value="Thêm Vào Giỏ" class="button_add_Cart"
+                                                data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </td>
 
                 </tr>
@@ -292,19 +546,21 @@
 
         <!-- script để lấy thông tin từ các thẻ để đưa qua bên trang products -->
         <script>
-            const cards = document.querySelectorAll(".food-card");
+            const images = document.querySelectorAll(".food-card");
 
-            cards.forEach(card => {
-                card.addEventListener("click", () => {
+            images.forEach(img => {
+                img.addEventListener("click", () => {
 
+                    //lấy card cha gần nhất
+                    const card = img.closest(".card");
                     const name = card.querySelector(".card-title").innerText;
                     const price = card.querySelector(".card-text").innerText;
-                    const img = card.querySelector("img").src;
+                    const image = img.src;
 
                     const food = {
                         name: name,
                         price: price,
-                        img: img
+                        img: image
                     };
 
                     // Lưu vào localStorage
@@ -321,13 +577,29 @@
                 <div class="row">
 
                     <!-- Thông tin quán -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <h5>Quán Anh 3</h5>
                         <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/facebook.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/instagram.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/youtube.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/tiktok.png" alt="">
+                            </a>
+                        </p>
                     </div>
 
                     <!-- Liên kết -->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <h5>Liên kết</h5>
                         <ul class="list-unstyled">
                             <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>

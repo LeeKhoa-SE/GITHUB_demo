@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="../CSS/home_style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/products_style.css">
     <script src="../JS/bootstrap.bundle.min.js"></script>
 
@@ -44,7 +44,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="#">Đặt Tiệc</a>
                                 <a class="dropdown-item" href="#">Tới Lấy</a>
-                                <a class="dropdown-item" href="#">Giao Hàng</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
                                 <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
                             </div>
                         </li>
@@ -66,13 +66,38 @@
                         <ul>
                             <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
                             <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
-                            <li><a href=""><img src="../IMG/HomePage/user.png" alt=""></a></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" data-bs-toggle="modal"
+                                    data-bs-target="#authModal"></li>
                         </ul>
 
                     </div>
                 </div>
             </div>
         </nav>
+
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" placeholder="Tên Đăng Nhập">
+                        <input type="password" class="form-control mb-2" placeholder="Mật khẩu">
+                        <button class="btn btn-primary w-100">Đăng nhập</button>
+
+                        <p class="text-center mt-2">
+                            Chưa có tài khoản?
+                            <a href="#">Đăng ký</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- Modal trigger button -->
 
@@ -124,14 +149,91 @@
                         <p id="price" style="font-size: 20px;text-align: center;"></p>
                         <label for="" style="font-weight: bold;">Ghi Chú: </label>
                         <input type="text" name="" id="" style="border-radius: 10px;height: 30px;">
-                        <a href="">
-                            <button id="btnAddCart">Thêm vào giỏ hàng</button>
-                        </a>
+                        <input type="button" value="Thêm Vào Giỏ" id="btnAddCart" class="button_add_Cart"
+                            data-bs-toggle="modal" data-bs-target="#modalIdAddCart">
                     </div>
                 </div>
             </div>
         </section>
 
+
+        <!-- modal button để hiển thị chọn số lượng -->
+        <div class="modal fade" id="modalIdAddCart" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Thêm vào giỏ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img id="modalImg" style="width: 100%; max-height:150px; object-fit:cover;">
+                            <h5 id="modalName"></h5>
+                            <p id="modalPrice"></p>
+                        </div>
+
+                        <label>Số lượng:</label>
+                        <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+                            <button class="btn btn-outline-secondary" id="minusBtn">-</button>
+
+                            <input type="text" id="quantity" value="1" style="width:60px; text-align:center;" readonly>
+
+                            <button class="btn btn-outline-secondary" id="plusBtn">+</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const quantityInput = document.getElementById("quantity");
+            const plusBtn = document.getElementById("plusBtn");
+            const minusBtn = document.getElementById("minusBtn");
+
+            function updateButtons() {
+                minusBtn.disabled = parseInt(quantityInput.value) <= 1;
+            }
+
+            plusBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                quantityInput.value = value + 1;
+                updateButtons();
+            });
+
+            minusBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                    updateButtons();
+                }
+            });
+
+            updateButtons();
+        </script>
+
+        <script>
+            var modalId = document.getElementById('modalIdAddCart');
+
+            modalId.addEventListener('show.bs.modal', function (event) {
+                document.getElementById("quantity").value = 1;
+                updateButtons();
+                // Button that triggered the modal
+                let button = event.relatedTarget;
+                // Extract info from data-bs-* attributes
+                let recipient = button.getAttribute('data-bs-whatever');
+            });
+        </script>
+
+        <!-- Lấy thông tin từ các thẻ trong Home và Menu để hiển thị lên trang products.html -->
         <script>
             const food = JSON.parse(localStorage.getItem("selectedFood"));
 
@@ -149,13 +251,29 @@
                 <div class="row">
 
                     <!-- Thông tin quán -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <h5>Quán Anh 3</h5>
                         <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/facebook.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/instagram.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/youtube.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/tiktok.png" alt="">
+                            </a>
+                        </p>
                     </div>
 
                     <!-- Liên kết -->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <h5>Liên kết</h5>
                         <ul class="list-unstyled">
                             <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
