@@ -41,10 +41,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Đặt Tiệc</a>
-                                <a class="dropdown-item" href="#">Tới Lấy</a>
+                                <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
                                 <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
-                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                                <a class="dropdown-item" href="anticho.html">Ăn Tại Chỗ</a>
                             </div>
                         </li>
                     </ul>
@@ -151,8 +151,12 @@
                         <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">
                             🛍 TớiLấy
                         </button>
-                        <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
-                        <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        <a href="anticho.html">
+                            <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
+                        </a>
+                        <a href="dattiec.html">
+                            <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        </a>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Close

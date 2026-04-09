@@ -5,10 +5,20 @@
     font-family: Arial, sans-serif;
 }
 
+html,
+body {
+    min-height: 100%;
+    background-color: #efe7dd;
+}
+
 #container {
     width: 100%;
     margin: auto;
     background-color: #efe7dd;
+}
+
+footer {
+    width: 100%;
 }
 
 nav {
@@ -43,12 +53,12 @@ nav {
     font-weight: bold;
 }
 
-.modal-body{
+.modal-body {
     background-color: #f1ebe4;
     text-align: center;
 }
 
-.modal-header{
+.modal-header {
     background-color: #eddac1;
 }
 

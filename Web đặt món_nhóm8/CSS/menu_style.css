@@ -20,7 +20,7 @@
     color: #5e2006;
 }
 
-.card{
+.card {
     border-radius: 50px;
     text-align: center;
 }
@@ -37,6 +37,10 @@ section h2 {
     color: #b23b2a;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.menu-buttons a {
+    min-width: 140px;
 }
 
 .card-order {
@@ -60,6 +64,13 @@ section h2 {
 
 #menu {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+#tieu_de {
+    width: 100%;
 }
 
 #menu td {
@@ -73,45 +84,78 @@ section h2 {
 
 #tieu_de {
     background: #e4b159;
-    text-align: center
+    text-align: center;
+    position: sticky;
+    top: 110px;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 20px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    box-sizing: border-box;
+}
+
+#tieu_de .search-group {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 #tieu_de button {
     font-size: medium;
     width: 150px;
-    background-color: #d8a03f;
-    color: #7d2905;
+    background-color: #F59E0B;
+    color: white;
     font-weight: bold;
 }
 
 #searchbar {
     border-radius: 10px;
-    width: 70%;
+    width: 320px;
+    max-width: 100%;
 }
 
 #searchbtn {
     border-radius: 10px;
-    width: 100px;
-    background-color: burlywood;
-    color: #7d2905;
+    width: 120px;
+    background-color: #F59E0B;
+    color: white;
     font-weight: bold;
-    margin-left: 50px;
+    margin-left: 0;
 }
 
-.list-group {
-    width: 200px;
-    height: 500px;
-    background-color: #e4b159;
-    box-shadow: 0px 5px 5px rgb(138, 110, 10);
 
+.list-group {
+    width: 225px;
+    height: 400px;
+    background-color: white;
+    box-shadow: 0px 5px 5px gray
 }
 
 .list-group-item {
-    width: 150px;
-    background-color: #dc9f35;
+    width: 190px;
+    background-color: #F59E0B;
+    color: white;
     padding: 20px;
     margin: 17px;
     border: 1px solid #d8a03f;
     border-radius: 10px 10px 10px;
     box-shadow: 0px 3px 3px rgb(138, 110, 10);
+}
+
+.list-group-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px gray;
+}
+
+#menu .dropdown-menu {
+    height: 400px;
+    padding-top: 0px;
 }

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Tiệc - Quán Anh 3</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+    <div id="container">
+        <nav class="navbar navbar-expand-sm sticky-top">
+            <div class="container">
+                <div>
+                    <a href="home.html"><img src="../IMG/MenuPage/image__4_-removebg-preview.png" alt=""
+                            id="logo_web"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="anticho.html">Ăn Tại Chỗ</a>
+                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">Đặt Món Ngay</button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" data-bs-toggle="modal"
+                                    data-bs-target="#authModal"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" placeholder="Tên Đăng Nhập">
+                        <input type="password" class="form-control mb-2" placeholder="Mật khẩu">
+                        <button class="btn btn-primary w-100">Đăng nhập</button>
+                        <p class="text-center mt-2">Chưa có tài khoản? <a href="#">Đăng ký</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Chọn Dịch Vụ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="giaohang.html"><button class="btn btn-primary w-100 mb-2">🚚 Giao Hàng</button></a>
+                        <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">🛍 Tới Lấy</button>
+                        <a href="anticho.html"><button class="btn btn-warning w-100 mb-2">🍽 Ăn Tại Chỗ</button></a>
+                        <a href="dattiec.html"><button class="btn btn-danger w-100 mb-2">🎉 Đặt Tiệc</button></a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-danger text-light">
+                            <h3 class="mb-0">🎉 Đặt Tiệc Tại Quán Anh 3</h3>
+                            <p class="mb-0">Form đặt tiệc với số khách, ngày giờ, loại tiệc và menu gợi ý.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning">
+                                <strong>Lưu ý:</strong> Giá dưới đây áp dụng theo đầu người và có thể thay đổi theo yêu
+                                cầu thực tế.
+                            </div>
+
+                            <form id="partyForm">
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <label for="partyName" class="form-label">Họ và tên *</label>
+                                        <input type="text" class="form-control" id="partyName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyPhone" class="form-label">Số điện thoại *</label>
+                                        <input type="tel" class="form-control" id="partyPhone" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="partyEmail">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyGuests" class="form-label">Số lượng khách *</label>
+                                        <select class="form-select" id="partyGuests" required>
+                                            <option value="">Chọn số khách</option>
+                                            <option value="10">10 khách</option>
+                                            <option value="20">20 khách</option>
+                                            <option value="30">30 khách</option>
+                                            <option value="40">40 khách</option>
+                                            <option value="50">50 khách</option>
+                                            <option value="60">60 khách</option>
+                                            <option value="70">70 khách</option>
+                                            <option value="100">100 khách</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyDate" class="form-label">Ngày tổ chức *</label>
+                                        <input type="date" class="form-control" id="partyDate" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyTime" class="form-label">Thời gian *</label>
+                                        <select class="form-select" id="partyTime" required>
+                                            <option value="">Chọn thời gian</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="18:00">18:00</option>
+                                            <option value="20:00">20:00</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="partyType" class="form-label">Loại tiệc *</label>
+                                        <select class="form-select" id="partyType" required>
+                                            <option value="">Chọn loại tiệc</option>
+                                            <option value="Sinh nhật">Sinh nhật</option>
+                                            <option value="Kỷ niệm">Kỷ niệm</option>
+                                            <option value="Công ty">Tiệc công ty</option>
+                                            <option value="Họp mặt">Họp mặt bạn bè</option>
+                                            <option value="Tiệc cưới">Tiệc cưới</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5>Combo tiệc mẫu</h5>
+                                    <div class="row gy-3">
+                                        <div class="col-md-4">
+                                            <div class="card border-danger h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Combo Vàng</h6>
+                                                    <p class="card-text mb-1">Giá: <strong>120.000đ/người</strong></p>
+                                                    <p class="small mb-2">2 món chính + 1 nước ngọt</p>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="menuCombo"
+                                                            id="comboGold" value="Combo Vàng" required>
+                                                        <label class="form-check-label" for="comboGold">Chọn Combo
+                                                            Vàng</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Combo Bạc</h6>
+                                                    <p class="card-text mb-1">Giá: <strong>150.000đ/người</strong></p>
+                                                    <p class="small mb-2">3 món chính + 2 nước ngọt</p>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="menuCombo"
+                                                            id="comboSilver" value="Combo Bạc">
+                                                        <label class="form-check-label" for="comboSilver">Chọn Combo
+                                                            Bạc</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-success h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Combo Kim Cương</h6>
+                                                    <p class="card-text mb-1">Giá: <strong>200.000đ/người</strong></p>
+                                                    <p class="small mb-2">4 món chính + 2 nước + tráng miệng</p>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="menuCombo"
+                                                            id="comboDiamond" value="Combo Kim Cương">
+                                                        <label class="form-check-label" for="comboDiamond">Chọn Combo
+                                                            Kim Cương</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <label for="partyRequests" class="form-label">Yêu cầu đặc biệt</label>
+                                    <textarea class="form-control" id="partyRequests" rows="3"
+                                        placeholder="Ví dụ: trang trí hoa, khu riêng tư, bánh kem..."></textarea>
+                                </div>
+
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" id="partyAgree" required>
+                                    <label class="form-check-label" for="partyAgree">
+                                        Tôi đồng ý với <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#termsModal">điều khoản và điều kiện</a>
+                                    </label>
+                                </div>
+
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-danger btn-lg">📅 Gửi yêu cầu đặt tiệc</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5>Gợi ý thực đơn</h5>
+                            <div class="row gy-3">
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <h6>Thực đơn 1</h6>
+                                        <p class="small mb-1">Cơm gà xối mỡ, canh chua, gỏi cuốn, trà đào</p>
+                                        <p class="small mb-0">Phù hợp tiệc sinh nhật và họp mặt gia đình.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <h6>Thực đơn 2</h6>
+                                        <p class="small mb-1">Bún bò Huế, bánh mì, mực chiên giòn, nước ngọt</p>
+                                        <p class="small mb-0">Phù hợp tiệc công ty và sự kiện công khai.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <h6>Thực đơn 3</h6>
+                                        <p class="small mb-1">Phở Hà Nội, bò lúc lắc, trái cây tráng miệng, cocktail</p>
+                                        <p class="small mb-0">Phù hợp tiệc kỷ niệm, tiệc cưới nhỏ.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận đặt tiệc</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Yêu cầu đặt tiệc của bạn đã được gửi!</p>
+                        <div id="partySummary"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <a href="menu.html" class="btn btn-danger">Quay lại Thực Đơn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="termsModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Điều Khoản và Điều Kiện</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>1. Thời gian đặt tiệc</h6>
+                        <p>Cần đặt trước ít nhất 24 giờ. Chúng tôi sẽ liên hệ lại để xác nhận sớm nhất.</p>
+                        <h6>2. Chính sách giá</h6>
+                        <p>Giá được tính theo đầu người, chưa bao gồm phí dịch vụ đặc biệt và trang trí.</p>
+                        <h6>3. Hủy tiệc</h6>
+                        <p>Nếu hủy trong vòng 6 giờ trước giờ tiệc, có thể áp dụng phí hủy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('partyDate').setAttribute('min', tomorrow.toISOString().split('T')[0]);
+
+            document.getElementById('partyForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('partyName').value;
+                const phone = document.getElementById('partyPhone').value;
+                const email = document.getElementById('partyEmail').value || 'Chưa cung cấp';
+                const guests = parseInt(document.getElementById('partyGuests').value, 10);
+                const date = document.getElementById('partyDate').value;
+                const time = document.getElementById('partyTime').value;
+                const type = document.getElementById('partyType').value;
+                const combo = document.querySelector('input[name="menuCombo"]:checked')?.value || 'Không chọn';
+                const requests = document.getElementById('partyRequests').value || 'Không có yêu cầu đặc biệt';
+
+                const pricePerPerson = combo === 'Combo Vàng' ? 120000 : combo === 'Combo Bạc' ? 150000 : combo === 'Combo Kim Cương' ? 200000 : 0;
+                const totalPrice = guests * pricePerPerson;
+
+                const summary = `
+                    <div class="mt-3 p-3 bg-light rounded">
+                        <p><strong>Họ tên:</strong> ${name}</p>
+                        <p><strong>Số điện thoại:</strong> ${phone}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Số khách:</strong> ${guests} người</p>
+                        <p><strong>Ngày:</strong> ${new Date(date).toLocaleDateString('vi-VN')}</p>
+                        <p><strong>Giờ:</strong> ${time}</p>
+                        <p><strong>Loại tiệc:</strong> ${type}</p>
+                        <p><strong>Combo:</strong> ${combo}</p>
+                        <p><strong>Giá theo đầu người:</strong> ${pricePerPerson.toLocaleString('vi-VN')}đ</p>
+                        <p><strong>Tổng giá dự kiến:</strong> ${totalPrice.toLocaleString('vi-VN')}đ</p>
+                        <p><strong>Yêu cầu:</strong> ${requests}</p>
+                    </div>
+                `;
+
+                document.getElementById('partySummary').innerHTML = summary;
+                const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                confirmModal.show();
+                this.reset();
+            });
+
+            function selectService(service) {
+                alert('Tính năng ' + service + ' đang được phát triển!');
+            }
+        </script>
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none"><img style="width: 40px;"
+                                    src="../IMG/HomePage/facebook.png" alt=""></a>
+                            <a href="#" class="text-light text-decoration-none"><img style="width: 40px;"
+                                    src="../IMG/HomePage/instagram.png" alt=""></a>
+                            <a href="#" class="text-light text-decoration-none"><img style="width: 40px;"
+                                    src="../IMG/HomePage/youtube.png" alt=""></a>
+                            <a href="#" class="text-light text-decoration-none"><img style="width: 40px;"
+                                    src="../IMG/HomePage/tiktok.png" alt=""></a>
+                        </p>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Liên kết</h5>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò Vấp, TP.HCM</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt=""> 08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt=""> Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <p class="text-center mb-0">© 2026 Quán Anh 3. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
