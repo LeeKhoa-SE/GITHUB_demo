@@ -3,154 +3,318 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 
-    <script src="../JS/bootstrap.bundle.min.js"></script>
-    <title>Thanh toán</title>
+<script src="../JS/bootstrap.bundle.min.js"></script>
+
+<title>Thanh toán</title>
 
 </head>
 
 
 
-<body style="background-image: url();">
+<body>
 
+<div id="container">
 
-    <!-- nền giống trang menu -->
+<!-- navbar -->
 
-    <div id="container">
+<nav class="navbar navbar-expand-sm sticky-top">
 
+<div class="container">
 
-        <!-- navbar -->
+<img src="../IMG/ThanhToan/image__4_-removebg-preview.png" id="logo_web" height="100px">
 
-        <nav class="navbar navbar-expand-sm sticky-top">
+<ul class="navbar-nav ms-auto">
 
-            <div class="container">
+<li class="nav-item">
+<a class="nav-link" href="home.html">Trang Chủ</a>
+</li>
 
-                <img src="../IMG/ThanhToan/image__4_-removebg-preview.png" id="logo_web" height="100px">
+<li class="nav-item">
+<a class="nav-link" href="menu.html">Menu</a>
+</li>
 
-                <ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="giohang.html">Giỏ Hàng</a>
+</li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">Trang Chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu.html">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="giohang.html">Giỏ Hàng</a>
-                    </li>
+</ul>
 
-                </ul>
+</div>
 
-            </div>
-
-        </nav>
-
-        <div class="container mt-4 mb-5">
-
-
-            <h2 class="checkout-title">
-                Thanh toán
-            </h2>
+</nav>
 
 
 
-            <div class="checkout-box">
+<div class="container mt-4 mb-5">
 
-
-                <div class="row">
-
-
-                    <div class="col-md-6">
-
-                        <label>Họ tên</label>
-                        <input class="form-control">
-
-                        <br>
-
-                        <label>SĐT</label>
-                        <input class="form-control">
-
-                        <br>
-
-                        <label>Địa chỉ</label>
-                        <input class="form-control">
-
-                        <br>
-
-                        <label>Ghi chú</label>
-                        <textarea class="form-control"></textarea>
-
-                    </div>
+<h2 class="checkout-title">
+Thanh toán
+</h2>
 
 
 
-                    <div class="col-md-6">
+<form id="checkoutForm" class="checkout-box">
 
-                        <h4>
-                            Đơn hàng
-                        </h4>
-
-                        <hr>
-
-                        <p><img src="../IMG/ThanhToan/bunrieu.jpg" alt="Bún bò huế" width="50" class="me-2"
-                                height="50px"> Bún bò
-                            huế x1 <span class="float-end">65k</span></p>
-
-                        <p><img src="../IMG/ThanhToan/Hu-Tieu-saved-for-web.webp" alt="Hủ tiếu nam vang" width="50"
-                                height="50px" class="me-2"> Hủ tiếu nam vang x1 <span class="float-end">55k</span></p>
-
-                        <p><img src="../IMG/ThanhToan/cocacola.jpeg" alt="Coca" width="50" class="me-2"> Coca x2 <span
-                                class="float-end">30k</span></p>
-
-                        <hr>
-
-                        <h5 class="text-end">
-                            Tổng: 150k
-                        </h5>
-
-                        <br>
-
-                        <label>Thanh toán</label>
-
-                        <select class="form-control">
-
-                            <option>Tiền mặt</option>
-                            <option>Momo</option>
-                            <option>Chuyển khoản</option>
-
-                        </select>
-
-                        <br>
-
-                        <a href="thanhcong.html">
-
-                            <button class="btn-pay">ĐẶT HÀNG</button>
-
-                        </a>
-
-                    </div>
+<div class="row">
 
 
-                </div>
+<!-- thông tin -->
+
+<div class="col-md-6">
+
+<label>Họ tên</label>
+<input class="form-control" id="fullName">
+<div class="text-danger" id="nameError"></div>
+
+<br>
+
+<label>SĐT</label>
+<input class="form-control" id="phone">
+<div class="text-danger" id="phoneError"></div>
+
+<br>
+
+<label>Địa chỉ</label>
+<input class="form-control">
+
+<br>
+
+<label>Ghi chú</label>
+<textarea class="form-control"></textarea>
+
+</div>
 
 
-            </div>
+
+<!-- đơn hàng -->
+
+<div class="col-md-6">
+
+<h4>
+Đơn hàng
+</h4>
+
+<hr>
+
+<p>
+<img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
+class="rounded"
+style="width:80px;height:80px;object-fit:cover">
+
+Phở bò tái x1
+
+<span class="float-end">
+65.000đ
+</span>
+</p>
 
 
-        </div>
 
-        <footer class="py-4">
-            <div class="container text-center">
-                © BunCom24h
-            </div>
-        </footer>
-    </div>
+<p>
+<img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg"
+class="rounded"
+style="width:80px;height:80px;object-fit:cover">
+
+Cơm tấm sườn bì chả x1
+
+<span class="float-end">
+75.000đ
+</span>
+</p>
+
+
+
+<p>
+<img src="../IMG/GioHang/Bún Bò Huế.jpg"
+class="rounded"
+style="width:80px;height:80px;object-fit:cover">
+
+Bún bò huế x1
+
+<span class="float-end">
+85.000đ
+</span>
+</p>
+
+
+
+<p>
+<img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
+class="rounded"
+style="width:80px;height:80px;object-fit:cover">
+
+Hủ tiếu nam vang x1
+
+<span class="float-end">
+75.000đ
+</span>
+</p>
+
+
+
+<hr>
+
+<h5 class="text-end">
+Tổng: 320.000đ
+</h5>
+
+<br>
+
+
+<label>Thanh toán</label>
+
+<select class="form-control">
+
+<option>Tiền mặt</option>
+
+<option>Momo</option>
+
+<option>Chuyển khoản</option>
+
+</select>
+
+<br>
+
+<button type="submit" class="btn-pay">
+
+ĐẶT HÀNG
+
+</button>
+
+</div>
+
+
+</div>
+
+</form>
+
+</div>
+
+
+
+<footer class="py-4">
+
+<div class="container text-center">
+
+© BunCom24h
+
+</div>
+
+</footer>
+
+</div>
+
+
+
+<script>
+
+document.getElementById("checkoutForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let valid=true;
+
+
+// lấy dữ liệu
+
+let name=document.getElementById("fullName").value.trim();
+
+let phone=document.getElementById("phone").value.trim();
+
+
+// thẻ báo lỗi
+
+let nameError=document.getElementById("nameError");
+
+let phoneError=document.getElementById("phoneError");
+
+
+// reset lỗi
+
+nameError.innerHTML="";
+
+phoneError.innerHTML="";
+
+
+// regex tên (cho phép tiếng Việt)
+
+let nameRegex=/^[a-zA-ZÀ-ỹ\s]+$/;
+
+
+// kiểm tra tên
+
+if(name==""){
+
+nameError.innerHTML="Chưa nhập họ tên";
+
+valid=false;
+
+}
+
+else if(!nameRegex.test(name)){
+
+nameError.innerHTML=
+"Tên không chứa số hoặc ký tự đặc biệt";
+
+valid=false;
+
+}
+
+else if(name.length<2){
+
+nameError.innerHTML="Tên quá ngắn";
+
+valid=false;
+
+}
+
+
+
+
+let phoneRegex=/^0[35789]\d{8}$/;
+
+
+
+if(phone==""){
+
+phoneError.innerHTML="Chưa nhập SĐT";
+
+valid=false;
+
+}
+
+else if(!phoneRegex.test(phone)){
+
+phoneError.innerHTML=
+"SĐT không hợp lệ (bắt đầu bằng 0, 10 số)";
+
+valid=false;
+
+}
+
+
+
+
+if(valid){
+
+window.location.href="thanhcong.html";
+
+}
+
+});
+
+</script>
+
+
+
 </body>
 
 </html>
