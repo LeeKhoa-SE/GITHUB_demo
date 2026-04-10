@@ -7,7 +7,7 @@
     <title>Đặt Tiệc - Quán Anh 3</title>
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
     <script src="../JS/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/dattiec_style.css">
 </head>
 
 <body>
@@ -34,8 +34,8 @@
                                 aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
-                                <a class="dropdown-item" href="anticho.html">Ăn Tại Chỗ</a>
-                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                                <a class="dropdown-item" href="#">Tới Lấy</a>
                                 <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
                             </div>
                         </li>
@@ -103,8 +103,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-danger text-light">
-                            <h3 class="mb-0">🎉 Đặt Tiệc Tại Quán Anh 3</h3>
+                        <div id="header" class="card-header text-light">
+                            <h3 class="mb-0"></h3>Đặt Tiệc Tại Quán Anh 3</h3>
                             <p class="mb-0">Form đặt tiệc với số khách, ngày giờ, loại tiệc và menu gợi ý.</p>
                         </div>
                         <div class="card-body">
@@ -237,7 +237,7 @@
                                 </div>
 
                                 <div class="d-grid mt-4">
-                                    <button type="submit" class="btn btn-danger btn-lg">📅 Gửi yêu cầu đặt tiệc</button>
+                                    <button id="btndattiec" type="submit" class="btn btn-lg">Gửi yêu cầu đặt tiệc</button>
                                 </div>
                             </form>
                         </div>
