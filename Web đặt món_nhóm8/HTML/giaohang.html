@@ -7,144 +7,487 @@
     <title>Giao Hàng</title>
     <link href="../CSS/bootstrap.min.css" rel="stylesheet">
     <script src="../JS/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../JS/jquery-4.0.0.min.js"></script>
 </head>
 
-<body class="bg-light">
+<body>
+    <div id="container">
+        <nav class="navbar navbar-expand-sm sticky-top" id="top">
+            <div class="container">
 
-    <div class="text-white py-3" style="background-color: #eddac1;">
-        <div class="container d-flex align-items-center">
-            <h5 class="mb-0 mx-auto fw-bold text-uppercase" style="color: #2B1B14;">Giao Hàng</h5>
+                <div>
+                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" aria-current="page">Trang Chủ
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" id="userIcon" style="cursor:pointer;"></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal button của "Đặt món ngay" -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="giaohang.html">
+                            <button class="btn btn-primary w-100 mb-2"> 🚚 Giao Hàng </button>
+                        </a>
+                        <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">
+                            🛍 TớiLấy
+                        </button>
+                        <a href="anticho.html">
+                            <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
+                        </a>
+                        <a href="dattiec.html">
+                            <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        </a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="container my-4">
-        <div class="row g-4">
+        <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm p-4 h-100">
-                    <h6 class="fw-bold mb-4 border-bottom pb-2">1. NHẬP ĐỊA CHỈ & THỜI GIAN</h6>
-
-                    <div class="input-group mb-4">
-                        <input type="text" class="form-control border-start-0" placeholder="Nhập địa chỉ nhận hàng...">
-                        <button class="btn btn-outline-primary border-0"><i class="bi bi-geo-alt-fill"></i></button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
-                    <p class="fw-bold small mb-2">Thời gian giao hàng</p>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="deliveryTime" id="now" checked>
-                        <label class="form-check-label small" for="now">Giao ngay (30-45 phút)</label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio" name="deliveryTime" id="later">
-                        <label class="form-check-label small" for="later">Đặt trước</label>
-                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" id="loginName" placeholder="Tên Đăng Nhập">
+                        <span id="loginError"></span>
+                        <input type="password" class="form-control mb-2" id="pwd" placeholder="Mật khẩu">
+                        <span id="pwdError"></span>
+                        <button class="btn btn-primary w-100" type="button" id="btnLogin">Đăng nhập</button>
 
-                    <div class="row g-2 mb-4">
-                        <div class="col-6">
-                            <select class="form-select form-select-sm">
-                                <option>Ngày 30/03</option>
-                            </select>
+                        <p class="text-center mt-2" id="helpRegister">
+                            Chưa có tài khoản?
+                            <a href="#" id="showRegister">Đăng ký</a>
+                        </p>
+
+                        <!-- FORM ĐĂNG KÝ (ẩn ban đầu) -->
+                        <div id="registerForm" style="display:none;">
+                            <input type="text" class="form-control mb-2" id="registerName" placeholder="Tên Đăng Nhập">
+                            <span id="registerError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerPWD" placeholder="Mật khẩu">
+                            <span id="registerPWDError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerRePWD"
+                                placeholder="Xác nhận lại mật khẩu">
+                            <span id="RePWDError"></span>
+
+                            <button class="btn btn-success w-100" type="button" id="btnRegister">Đăng ký</button>
+
+                            <p class="text-center mt-2">
+                                Đã có tài khoản?
+                                <a href="#" id="showLogin">Đăng nhập</a>
+                            </p>
                         </div>
-                        <div class="col-6">
-                            <select class="form-select form-select-sm">
-                                <option>10:00 - 10:30</option>
-                            </select>
-                        </div>
                     </div>
 
-                    <button class="btn w-100 mt-auto py-2 fw-bold" style="background-color: orange; color: white;">Lưu
-                        địa chỉ</button>
                 </div>
             </div>
+        </div>
 
-            <div class="col-lg-5">
-                <div class="card border-0 shadow-sm p-4 h-100">
-                    <h6 class="fw-bold mb-4 border-bottom pb-2">2. CHỌN MÓN ĂN</h6>
+        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
+        <script>
+            $(document).ready(function () {
 
-                    <div class="row g-3 overflow-auto" style="max-height: 500px;">
-                        <div class="col-6">
-                            <div class="card border p-2 h-100 shadow-sm">
-                                <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
-                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
-                                <div class="small fw-bold text-truncate">Phở Bò Tái</div>
-                                <div class="text-danger fw-bold mb-2">85.000đ</div>
-                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                $("#userIcon").click(function () {
+                    var currentUser = localStorage.getItem("currentUser");
+                    if (!currentUser) {
+                        //  chưa login → mở modal
+                        $("#authModal").modal("show");
+                    } else {
+                        //  đã login → hỏi đăng xuất
+                        if (confirm("Bạn có muốn đăng xuất không?")) {
+                            localStorage.removeItem("currentUser");
+                            alert("Đã đăng xuất!");
+                        }
+                    }
+                });
+
+                $("#showRegister").click(function (e) {
+                    e.preventDefault();
+                    $("#helpRegister").hide();
+                    $("#loginName, #pwd, #btnLogin").hide();
+                    $("#loginError, #pwdError").hide();
+                    $("#registerForm").show();
+                    $("#modalTitle").text("Đăng ký")
+                });
+
+                $("#showLogin").click(function (e) {
+                    e.preventDefault();
+                    $("#loginName, #pwd, #btnLogin").show();
+                    $("#loginError, #pwdError").show();
+                    $("#helpRegister").show();
+                    $("#modalTitle").text("Đăng nhập")
+                    $("#registerForm").hide();
+                });
+
+                $("#btnLogin").click(function (e) {
+                    e.preventDefault();
+                    var loginName = ($("#loginName").val());
+                    var pwd = ($("#pwd").val());
+                    $("#loginError").text("");
+                    $("#pwdError").text("");
+                    if (loginName == "") {
+                        $("#loginError").text("Không được để trống!");
+                        return;
+                    } else if (pwd == "") {
+                        $("#pwdError").text("Không được để trống!");
+                        return;
+                    } else {
+                        var user = JSON.parse(localStorage.getItem("user"));
+
+                        if (!user || user.username !== loginName || user.password !== pwd) {
+                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
+                            return;
+                        }
+
+                        //  login thành công
+                        localStorage.setItem("currentUser", loginName);
+
+                        alert("Đăng nhập thành công!");
+                        $("#authModal").modal("hide");
+                    }
+                });
+
+                $("#btnRegister").click(function (e) {
+                    e.preventDefault();
+                    var regRegisterName = /^[A-Za-z\d]+$/;
+                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
+
+                    var registerName = ($("#registerName").val());
+                    var registerPWD = ($("#registerPWD").val());
+                    var registerRePWD = ($("#registerRePWD").val());
+                    $("#registerError").text("");
+                    $("#registerPWDError").text("");
+                    $("#RePWDError").text("");
+                    if (registerName == "") {
+                        $("#registerError").text("Không được để trống!");
+                        return;
+                    } else if (registerPWD == "") {
+                        $("#registerPWDError").text("Không được để trống!");
+                        return;
+                    } else if (registerRePWD == "") {
+                        $("#RePWDError").text("Không được để trống!");
+                        return;
+                    } else {
+                        if (!regRegisterName.test(registerName)) {
+                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
+                            return;
+                        } else if (!regRegisterPWD.test(registerPWD)) {
+                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
+                            return;
+                        } else if (registerRePWD != registerPWD) {
+                            $("#RePWDError").text("Không khớp với mật khẩu!");
+                            return;
+                        }
+                    }
+
+                    //  lưu tài khoản
+                    var user = {
+                        username: registerName,
+                        password: registerPWD
+                    };
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    //  lưu trạng thái đang đăng nhập luôn
+                    localStorage.setItem("currentUser", registerName);
+
+                    alert("Đăng ký thành công!");
+
+                    // đóng modal
+                    $("#authModal").modal("hide");
+                });
+
+                var currentUser = localStorage.getItem("currentUser");
+
+                if (currentUser) {
+                    console.log("Đang đăng nhập:", currentUser);
+                }
+
+            });
+
+            $('#authModal').on('show.bs.modal', function () {
+                $(this).find("input").val("");
+                $(this).find("span").text("");
+                $("#registerForm").hide();
+                $("#loginName, #pwd, #btnLogin").show();
+                $("#helpRegister").show();
+                $("#modalTitle").text("Đăng nhập");
+            });
+
+
+        </script>
+
+        <div class="text-white py-3">
+            <div class="container d-flex align-items-center">
+                <h2 class="mb-0 mx-auto fw-bold text-uppercase" style="color: #7d2905; margin-top: 30px;">Giao Hàng</h2>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <div class="row g-4">
+
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-2">1. NHẬP ĐỊA CHỈ & THỜI GIAN</h6>
+
+                        <div class="input-group mb-4">
+                            <input type="text" class="form-control border-start-0"
+                                placeholder="Nhập địa chỉ nhận hàng...">
+                            <button class="btn btn-outline-primary border-0"><i class="bi bi-geo-alt-fill"></i></button>
+                        </div>
+
+                        <p class="fw-bold small mb-2">Thời gian giao hàng</p>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="deliveryTime" id="now" checked>
+                            <label class="form-check-label small" for="now">Giao ngay (30-45 phút)</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="deliveryTime" id="later">
+                            <label class="form-check-label small" for="later">Đặt trước</label>
+                        </div>
+
+                        <div class="row g-2 mb-4">
+                            <div class="col-6">
+                                <select class="form-select form-select-sm">
+                                    <option>Ngày 30/03</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-select form-select-sm">
+                                    <option>10:00 - 10:30</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="card border p-2 h-100 shadow-sm">
-                                <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg"
-                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
-                                <div class="small fw-bold text-truncate">Cơm Tấm Sườn Bì Chả</div>
-                                <div class="text-danger fw-bold mb-2">75.000đ</div>
-                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card border p-2 h-100 shadow-sm">
-                                <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
-                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
-                                <div class="small fw-bold text-truncate">Bún Bò Huế</div>
-                                <div class="text-danger fw-bold mb-2">85.000đ</div>
-                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="card border p-2 h-100 shadow-sm">
-                                <img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
-                                    class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
-                                <div class="small fw-bold text-truncate">Hủ Tiếu</div>
-                                <div class="text-danger fw-bold mb-2">75.000đ</div>
-                                <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
-                            </div>
-                        </div>
+
+                        <button class="btn w-100 mt-auto py-2 fw-bold"
+                            style="background-color: orange; color: white;">Lưu
+                            địa chỉ</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3">
-                <div class="card border-0 shadow-sm p-4 h-100">
-                    <h6 class="fw-bold mb-4 border-bottom pb-2">3. GIỎ HÀNG</h6>
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-2">2. CHỌN MÓN ĂN</h6>
 
-                    <div class="flex-grow-1 overflow-auto mb-4" style="max-height: 300px;">
-                        <div class="d-flex align-items-center mb-3 border-bottom pb-2">
-                            <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg" class="rounded me-2"
-                                width="50" height="50">
-                            <div class="flex-grow-1">
-                                <div class="fw-bold" style="font-size: 0.8rem;">Cơm Tấm Sườn Bì Chả</div>
-                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-light border">-</button>
-                                        <span class="px-2">1</span>
-                                        <button class="btn btn-light border">+</button>
-                                    </div>
-                                    <span class="small fw-bold">75.000đ</span>
+                        <div class="row g-3 overflow-auto" style="max-height: 500px;">
+                            <div class="col-6">
+                                <div class="card border p-2 h-100 shadow-sm">
+                                    <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
+                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <div class="small fw-bold text-truncate">Phở Bò Tái</div>
+                                    <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                    <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border p-2 h-100 shadow-sm">
+                                    <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg"
+                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <div class="small fw-bold text-truncate">Cơm Tấm Sườn Bì Chả</div>
+                                    <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                    <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border p-2 h-100 shadow-sm">
+                                    <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
+                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <div class="small fw-bold text-truncate">Bún Bò Huế</div>
+                                    <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                    <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border p-2 h-100 shadow-sm">
+                                    <img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
+                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <div class="small fw-bold text-truncate">Hủ Tiếu</div>
+                                    <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                    <button class="btn btn-warning btn-sm text-white fw-bold">+ Thêm</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="border-top pt-3">
-                        <div class="d-flex justify-content-between mb-1 small">
-                            <span>Tạm tính:</span>
-                            <span>75.000đ</span>
+                <div class="col-lg-3">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-2">3. GIỎ HÀNG</h6>
+
+                        <div class="flex-grow-1 overflow-auto mb-4" style="max-height: 300px;">
+                            <div class="d-flex align-items-center mb-3 border-bottom pb-2">
+                                <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg" class="rounded me-2"
+                                    width="50" height="50">
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold" style="font-size: 0.8rem;">Cơm Tấm Sườn Bì Chả</div>
+                                    <div class="d-flex justify-content-between align-items-center mt-1">
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-light border">-</button>
+                                            <span class="px-2">1</span>
+                                            <button class="btn btn-light border">+</button>
+                                        </div>
+                                        <span class="small fw-bold">75.000đ</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between mb-2 small text-danger">
-                            <span>Phí vận chuyển:</span>
-                            <span>15.000đ</span>
+
+                        <div class="border-top pt-3">
+                            <div class="d-flex justify-content-between mb-1 small">
+                                <span>Tạm tính:</span>
+                                <span>75.000đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2 small text-danger">
+                                <span>Phí vận chuyển:</span>
+                                <span>15.000đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                                <span>Tổng:</span>
+                                <span class="text-success">90.000đ</span>
+                            </div>
+                            <a href="checkout.html"><button class="btn w-100 mt-auto py-2 fw-bold"
+                                    style="background-color: orange; color: white;">
+                                    THANH TOÁN
+                                </button></a>
                         </div>
-                        <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
-                            <span>Tổng:</span>
-                            <span class="text-success">90.000đ</span>
-                        </div>
-                        <a href="checkout.html"><button class="btn w-100 mt-auto py-2 fw-bold"
-                                style="background-color: orange; color: white;">
-                                THANH TOÁN
-                            </button></a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
+                <div class="row">
+
+                    <!-- Thông tin quán -->
+                    <div class="col-md-4">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/facebook.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/instagram.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/youtube.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/tiktok.png" alt="">
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Liên kết -->
+                    <div class="col-md-2">
+                        <h5>Liên kết</h5>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Liên hệ -->
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò
+                            Vấp, TP.HCM</p>
+                    </div>
+
+                    <!-- Giờ mở cửa -->
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt=""> 08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt=""> Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+
+                </div>
+
+                <hr class="bg-light">
+
+                <p class="text-center mb-0">
+                    © 2026 Quán Anh 3. All rights reserved.
+                </p>
+            </div>
+        </footer>
     </div>
 </body>
 

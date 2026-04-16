@@ -132,3 +132,7 @@ nav {
 #user li:hover {
     transform: translateY(-5px);
 }
+
+span {
+    color: red;
+}

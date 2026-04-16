@@ -48,7 +48,7 @@ section h2 {
 }
 
 #introWeb {
-    width: 90%;
+    width: 85%;
     margin: auto;
     height: 400px;
     border: 2px solid black;
@@ -80,3 +80,4 @@ section h2 {
     height: 5px;
     background-color: #391200;
 }
+

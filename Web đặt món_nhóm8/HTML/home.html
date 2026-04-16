@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
     <script src="../JS/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../CSS/home_style.css">
     <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../JS/jquery-4.0.0.min.js"></script>
 </head>
 
 <body>
@@ -42,9 +43,10 @@
                                 aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
-                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
+                                <a class="dropdown-item" href="toilay.html" onclick="selectService('pickup')">Tới
+                                    Lấy</a>
                                 <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
-                                <a class="dropdown-item" href="anticho.html">Ăn Tại Chỗ</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
                             </div>
                         </li>
                     </ul>
@@ -65,8 +67,7 @@
                         <ul>
                             <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
                             <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
-                            <li><img src="../IMG/HomePage/user.png" alt="" data-bs-toggle="modal"
-                                    data-bs-target="#authModal"></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" id="userIcon" style="cursor:pointer;"></li>
                         </ul>
 
                     </div>
@@ -74,65 +75,7 @@
             </div>
         </nav>
 
-
-        <div class="modal fade" id="authModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title">Đăng nhập</h5>
-                        <button class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <input type="text" class="form-control mb-2" placeholder="Tên Đăng Nhập">
-                        <input type="password" class="form-control mb-2" placeholder="Mật khẩu">
-                        <button class="btn btn-primary w-100">Đăng nhập</button>
-
-                        <p class="text-center mt-2">
-                            Chưa có tài khoản?
-                            <a href="#">Đăng ký</a>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-
-        <header>
-            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <img src="../IMG/HomePage/banner1.jpg" class="w-100d-block" alt="First slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../IMG/HomePage/banner2.jpg" class="w-100d-block" alt="Second slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../IMG/HomePage/banner3.jpg" class="w-100d-block" alt="Third slide" />
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </header>
-
-
-
-        <!-- Modal trigger button -->
-
-
-        <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <!-- Modal button của "Đặt món ngay" -->
         <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
             role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
@@ -167,12 +110,220 @@
                 </div>
             </div>
         </div>
-        <!-- Optional: Place to the bottom of scripts -->
+
+        <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" id="loginName" placeholder="Tên Đăng Nhập">
+                        <span id="loginError"></span>
+                        <input type="password" class="form-control mb-2" id="pwd" placeholder="Mật khẩu">
+                        <span id="pwdError"></span>
+                        <button class="btn btn-primary w-100" type="button" id="btnLogin">Đăng nhập</button>
+
+                        <p class="text-center mt-2" id="helpRegister">
+                            Chưa có tài khoản?
+                            <a href="#" id="showRegister">Đăng ký</a>
+                        </p>
+
+                        <!-- FORM ĐĂNG KÝ (ẩn ban đầu) -->
+                        <div id="registerForm" style="display:none;">
+                            <input type="text" class="form-control mb-2" id="registerName" placeholder="Tên Đăng Nhập">
+                            <span id="registerError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerPWD" placeholder="Mật khẩu">
+                            <span id="registerPWDError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerRePWD"
+                                placeholder="Xác nhận lại mật khẩu">
+                            <span id="RePWDError"></span>
+
+                            <button class="btn btn-success w-100" type="button" id="btnRegister">Đăng ký</button>
+
+                            <p class="text-center mt-2">
+                                Đã có tài khoản?
+                                <a href="#" id="showLogin">Đăng nhập</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
         <script>
-            const myModal = new bootstrap.Modal(
-                document.getElementById("modalId")
-            );
+            $(document).ready(function () {
+
+                $("#userIcon").click(function () {
+                    var currentUser = localStorage.getItem("currentUser");
+                    if (!currentUser) {
+                        //  chưa login → mở modal
+                        $("#authModal").modal("show");
+                    } else {
+                        //  đã login → hỏi đăng xuất
+                        if (confirm("Bạn có muốn đăng xuất không?")) {
+                            localStorage.removeItem("currentUser");
+                            alert("Đã đăng xuất!");
+                        }
+                    }
+                });
+
+                $("#showRegister").click(function (e) {
+                    e.preventDefault();
+                    $("#helpRegister").hide();
+                    $("#loginName, #pwd, #btnLogin").hide();
+                    $("#loginError, #pwdError").hide();
+                    $("#registerForm").show();
+                    $("#modalTitle").text("Đăng ký")
+                });
+
+                $("#showLogin").click(function (e) {
+                    e.preventDefault();
+                    $("#loginName, #pwd, #btnLogin").show();
+                    $("#loginError, #pwdError").show();
+                    $("#helpRegister").show();
+                    $("#modalTitle").text("Đăng nhập")
+                    $("#registerForm").hide();
+                });
+
+                $("#btnLogin").click(function (e) {
+                    e.preventDefault();
+                    var loginName = ($("#loginName").val());
+                    var pwd = ($("#pwd").val());
+                    $("#loginError").text("");
+                    $("#pwdError").text("");
+                    if (loginName == "") {
+                        $("#loginError").text("Không được để trống!");
+                        return;
+                    } else if (pwd == "") {
+                        $("#pwdError").text("Không được để trống!");
+                        return;
+                    } else {
+                        var user = JSON.parse(localStorage.getItem("user"));
+
+                        if (!user || user.username !== loginName || user.password !== pwd) {
+                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
+                            return;
+                        }
+
+                        //  login thành công
+                        localStorage.setItem("currentUser", loginName);
+
+                        alert("Đăng nhập thành công!");
+                        $("#authModal").modal("hide");
+                    }
+                });
+
+                $("#btnRegister").click(function (e) {
+                    e.preventDefault();
+                    var regRegisterName = /^[A-Za-z\d]+$/;
+                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
+
+                    var registerName = ($("#registerName").val());
+                    var registerPWD = ($("#registerPWD").val());
+                    var registerRePWD = ($("#registerRePWD").val());
+                    $("#registerError").text("");
+                    $("#registerPWDError").text("");
+                    $("#RePWDError").text("");
+                    if (registerName == "") {
+                        $("#registerError").text("Không được để trống!");
+                        return;
+                    } else if (registerPWD == "") {
+                        $("#registerPWDError").text("Không được để trống!");
+                        return;
+                    } else if (registerRePWD == "") {
+                        $("#RePWDError").text("Không được để trống!");
+                        return;
+                    } else {
+                        if (!regRegisterName.test(registerName)) {
+                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
+                            return;
+                        } else if (!regRegisterPWD.test(registerPWD)) {
+                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
+                            return;
+                        } else if (registerRePWD != registerPWD) {
+                            $("#RePWDError").text("Không khớp với mật khẩu!");
+                            return;
+                        }
+                    }
+
+                    //  lưu tài khoản
+                    var user = {
+                        username: registerName,
+                        password: registerPWD
+                    };
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    //  lưu trạng thái đang đăng nhập luôn
+                    localStorage.setItem("currentUser", registerName);
+
+                    alert("Đăng ký thành công!");
+
+                    // đóng modal
+                    $("#authModal").modal("hide");
+                });
+
+                var currentUser = localStorage.getItem("currentUser");
+
+                if (currentUser) {
+                    console.log("Đang đăng nhập:", currentUser);
+                }
+
+            });
+
+            $('#authModal').on('show.bs.modal', function () {
+                $(this).find("input").val("");
+                $(this).find("span").text("");
+                $("#registerForm").hide();
+                $("#loginName, #pwd, #btnLogin").show();
+                $("#helpRegister").show();
+                $("#modalTitle").text("Đăng nhập");
+            });
+
+
         </script>
+
+        <header>
+            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="../IMG/HomePage/banner1.jpg" class="w-100d-block" alt="First slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../IMG/HomePage/banner2.jpg" class="w-100d-block" alt="Second slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../IMG/HomePage/banner3.jpg" class="w-100d-block" alt="Third slide" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </header>
+
+
+
+        <!-- Modal trigger button -->
+
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+
 
         <section>
             <div id="introWeb">
@@ -211,7 +362,6 @@
                 <hr class="hrSection">
                 <div class="row justify-content-center align-items-center g-2">
                     <div class="col-md-4">
-
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/comtam.jpg" alt="Cơm Tấm" />
                             <div class="card-body">
@@ -221,10 +371,9 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-md-4">
 
+                    <div class="col-md-4">
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/bunbo.jpg" alt="Bún Bò" />
                             <div class="card-body">
@@ -234,11 +383,9 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="col-md-4">
-
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/hutieu.webp" alt="Hủ Tiếu" />
                             <div class="card-body">
@@ -248,11 +395,9 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="col-md-4">
-
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/pho.webp" alt="Phở" />
                             <div class="card-body">
@@ -262,11 +407,9 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="col-md-4">
-
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/banhmi.jpg" alt="Bánh Mì" />
                             <div class="card-body">
@@ -276,11 +419,9 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="col-md-4">
-
                         <div class="card">
                             <img class="card-img-top food-card" src="../IMG/HomePage/bundaumamtom.webp"
                                 alt="Bún Đậu Mắm Tôm" />
@@ -291,7 +432,6 @@
                                     data-bs-target="#modalIdAddCart">
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
