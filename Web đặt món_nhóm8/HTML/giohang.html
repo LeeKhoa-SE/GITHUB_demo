@@ -9,6 +9,40 @@
     <script src="../JS/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../CSS/style.css">
     <script src="../JS/jquery-4.0.0.min.js"></script>
+    <script src="../JS/signIn_signUp.js"></script>
+    <script src="../JS/giohang.js"></script>
+    <style>
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: transparent;
+            font-size: 18px;
+            font-weight: bold;
+            color: #b4704e;
+            transition: 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #b4704e;
+            color: white;
+        }
+
+        .quantity-number {
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
     <style>
         .bg-mint {
             background-color: white;
@@ -55,7 +89,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                            <a class="nav-link" href="khuyenmai.html">Khuyến Mãi</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -177,127 +211,7 @@
             </div>
         </div>
 
-        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
         <script>
-            $(document).ready(function () {
-
-                $("#userIcon").click(function () {
-                    var currentUser = localStorage.getItem("currentUser");
-                    if (!currentUser) {
-                        //  chưa login → mở modal
-                        $("#authModal").modal("show");
-                    } else {
-                        //  đã login → hỏi đăng xuất
-                        if (confirm("Bạn có muốn đăng xuất không?")) {
-                            localStorage.removeItem("currentUser");
-                            alert("Đã đăng xuất!");
-                        }
-                    }
-                });
-
-                $("#showRegister").click(function (e) {
-                    e.preventDefault();
-                    $("#helpRegister").hide();
-                    $("#loginName, #pwd, #btnLogin").hide();
-                    $("#loginError, #pwdError").hide();
-                    $("#registerForm").show();
-                    $("#modalTitle").text("Đăng ký")
-                });
-
-                $("#showLogin").click(function (e) {
-                    e.preventDefault();
-                    $("#loginName, #pwd, #btnLogin").show();
-                    $("#loginError, #pwdError").show();
-                    $("#helpRegister").show();
-                    $("#modalTitle").text("Đăng nhập")
-                    $("#registerForm").hide();
-                });
-
-                $("#btnLogin").click(function (e) {
-                    e.preventDefault();
-                    var loginName = ($("#loginName").val());
-                    var pwd = ($("#pwd").val());
-                    $("#loginError").text("");
-                    $("#pwdError").text("");
-                    if (loginName == "") {
-                        $("#loginError").text("Không được để trống!");
-                        return;
-                    } else if (pwd == "") {
-                        $("#pwdError").text("Không được để trống!");
-                        return;
-                    } else {
-                        var user = JSON.parse(localStorage.getItem("user"));
-
-                        if (!user || user.username !== loginName || user.password !== pwd) {
-                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
-                            return;
-                        }
-
-                        //  login thành công
-                        localStorage.setItem("currentUser", loginName);
-
-                        alert("Đăng nhập thành công!");
-                        $("#authModal").modal("hide");
-                    }
-                });
-
-                $("#btnRegister").click(function (e) {
-                    e.preventDefault();
-                    var regRegisterName = /^[A-Za-z\d]+$/;
-                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
-
-                    var registerName = ($("#registerName").val());
-                    var registerPWD = ($("#registerPWD").val());
-                    var registerRePWD = ($("#registerRePWD").val());
-                    $("#registerError").text("");
-                    $("#registerPWDError").text("");
-                    $("#RePWDError").text("");
-                    if (registerName == "") {
-                        $("#registerError").text("Không được để trống!");
-                        return;
-                    } else if (registerPWD == "") {
-                        $("#registerPWDError").text("Không được để trống!");
-                        return;
-                    } else if (registerRePWD == "") {
-                        $("#RePWDError").text("Không được để trống!");
-                        return;
-                    } else {
-                        if (!regRegisterName.test(registerName)) {
-                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
-                            return;
-                        } else if (!regRegisterPWD.test(registerPWD)) {
-                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
-                            return;
-                        } else if (registerRePWD != registerPWD) {
-                            $("#RePWDError").text("Không khớp với mật khẩu!");
-                            return;
-                        }
-                    }
-
-                    //  lưu tài khoản
-                    var user = {
-                        username: registerName,
-                        password: registerPWD
-                    };
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    //  lưu trạng thái đang đăng nhập luôn
-                    localStorage.setItem("currentUser", registerName);
-
-                    alert("Đăng ký thành công!");
-
-                    // đóng modal
-                    $("#authModal").modal("hide");
-                });
-
-                var currentUser = localStorage.getItem("currentUser");
-
-                if (currentUser) {
-                    console.log("Đang đăng nhập:", currentUser);
-                }
-
-            });
-
             $('#authModal').on('show.bs.modal', function () {
                 $(this).find("input").val("");
                 $(this).find("span").text("");
@@ -306,79 +220,21 @@
                 $("#helpRegister").show();
                 $("#modalTitle").text("Đăng nhập");
             });
-
-
         </script>
+
 
         <div class="container">
             <div class="row"></div>
             <h2 class="text-center mb-4 fw-bold" style="color: #7d2905;margin-top: 30px;">GIỎ HÀNG CỦA BẠN</h2>
             <div class="row g-4" style="background-color: #efe7dd;">
                 <div class="col-lg-8">
-                    <div class="card border-0 shadow-sm p-4">
-                        <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                            <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
-                                class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
-                            <div class="ms-3 flex-grow-1">
-                                <h6 class="mb-0 fw-bold">Phở Bò Tái</h6>
-                                <small class="text-muted">1 bát</small>
-                                <div class="fw-bold">85,000đ</div>
-                            </div>
-                            <div class="d-flex align-items-center border rounded bg-light p-1">
-                                <button class="btn btn-sm btn-light text-primary fw-bold">+</button>
-                                <span class="px-2">1</span>
-                                <button class="btn btn-sm btn-light text-secondary fw-bold">-</button>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                            <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg" class="rounded"
-                                style="width: 80px; height: 80px; object-fit: cover;">
-                            <div class="ms-3 flex-grow-1">
-                                <h6 class="mb-0 fw-bold">Cơm Tấm Sườn Bì Chả</h6>
-                                <small class="text-muted">1 suất</small>
-                                <div class="fw-bold">75,000đ</div>
-                            </div>
-                            <div class="d-flex align-items-center border rounded bg-light p-1">
-                                <button class="btn btn-sm btn-light text-primary fw-bold">+</button>
-                                <span class="px-2">1</span>
-                                <button class="btn btn-sm btn-light text-secondary fw-bold">-</button>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                            <img src="../IMG/GioHang/Bún Bò Huế.jpg" class="rounded"
-                                style="width: 80px; height: 80px; object-fit: cover;">
-                            <div class="ms-3 flex-grow-1">
-                                <h6 class="mb-0 fw-bold">Bún Bò Huế</h6>
-                                <small class="text-muted">1 suất</small>
-                                <div class="fw-bold">85,000đ</div>
-                            </div>
-                            <div class="d-flex align-items-center border rounded bg-light p-1">
-                                <button class="btn btn-sm btn-light text-primary fw-bold">+</button>
-                                <span class="px-2">1</span>
-                                <button class="btn btn-sm btn-light text-secondary fw-bold">-</button>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                            <img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
-                                class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
-                            <div class="ms-3 flex-grow-1">
-                                <h6 class="mb-0 fw-bold">Hủ Tiếu</h6>
-                                <small class="text-muted">1 suất</small>
-                                <div class="fw-bold">75,000đ</div>
-                            </div>
-                            <div class="d-flex align-items-center border rounded bg-light p-1">
-                                <button class="btn btn-sm btn-light text-primary fw-bold">+</button>
-                                <span class="px-2">1</span>
-                                <button class="btn btn-sm btn-light text-secondary fw-bold">-</button>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="card border-0 shadow-sm p-4" id="cartContainer"> </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-sm bg-mint p-4">
                         <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
                             <span>TỔNG CỘNG</span>
-                            <span>320,000đ</span>
+                            <span id="totalPrice">0đ</span>
                         </div>
                         <a href="menu.html">
                             <button class="button_Cart" style="background-color: #9f9d99;color: #2B1B14;">THÊM MÓN

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <script src="../JS/jquery-4.0.0.min.js"></script>
     <link rel="stylesheet" href="../CSS/dattiec_style.css">
+    <script src="../JS/signIn_signUp.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@
                             <a class="nav-link" href="menu.html">Thực Đơn</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                            <a class="nav-link" href="khuyenmai.html">Khuyến Mãi</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
@@ -37,7 +38,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
                                 <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
-                                <a class="dropdown-item" href="#">Tới Lấy</a>
+                                <a class="dropdown-item" href="toilay.html">Tới Lấy</a>
                                 <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
                             </div>
                         </li>
@@ -109,138 +110,7 @@
             </div>
         </div>
 
-        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
-        <script>
-            $(document).ready(function () {
 
-                $("#userIcon").click(function () {
-                    var currentUser = localStorage.getItem("currentUser");
-                    if (!currentUser) {
-                        //  chưa login → mở modal
-                        $("#authModal").modal("show");
-                    } else {
-                        //  đã login → hỏi đăng xuất
-                        if (confirm("Bạn có muốn đăng xuất không?")) {
-                            localStorage.removeItem("currentUser");
-                            alert("Đã đăng xuất!");
-                        }
-                    }
-                });
-
-                $("#showRegister").click(function (e) {
-                    e.preventDefault();
-                    $("#helpRegister").hide();
-                    $("#loginName, #pwd, #btnLogin").hide();
-                    $("#loginError, #pwdError").hide();
-                    $("#registerForm").show();
-                    $("#modalTitle").text("Đăng ký")
-                });
-
-                $("#showLogin").click(function (e) {
-                    e.preventDefault();
-                    $("#loginName, #pwd, #btnLogin").show();
-                    $("#loginError, #pwdError").show();
-                    $("#helpRegister").show();
-                    $("#modalTitle").text("Đăng nhập")
-                    $("#registerForm").hide();
-                });
-
-                $("#btnLogin").click(function (e) {
-                    e.preventDefault();
-                    var loginName = ($("#loginName").val());
-                    var pwd = ($("#pwd").val());
-                    $("#loginError").text("");
-                    $("#pwdError").text("");
-                    if (loginName == "") {
-                        $("#loginError").text("Không được để trống!");
-                        return;
-                    } else if (pwd == "") {
-                        $("#pwdError").text("Không được để trống!");
-                        return;
-                    } else {
-                        var user = JSON.parse(localStorage.getItem("user"));
-
-                        if (!user || user.username !== loginName || user.password !== pwd) {
-                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
-                            return;
-                        }
-
-                        //  login thành công
-                        localStorage.setItem("currentUser", loginName);
-
-                        alert("Đăng nhập thành công!");
-                        $("#authModal").modal("hide");
-                    }
-                });
-
-                $("#btnRegister").click(function (e) {
-                    e.preventDefault();
-                    var regRegisterName = /^[A-Za-z\d]+$/;
-                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
-
-                    var registerName = ($("#registerName").val());
-                    var registerPWD = ($("#registerPWD").val());
-                    var registerRePWD = ($("#registerRePWD").val());
-                    $("#registerError").text("");
-                    $("#registerPWDError").text("");
-                    $("#RePWDError").text("");
-                    if (registerName == "") {
-                        $("#registerError").text("Không được để trống!");
-                        return;
-                    } else if (registerPWD == "") {
-                        $("#registerPWDError").text("Không được để trống!");
-                        return;
-                    } else if (registerRePWD == "") {
-                        $("#RePWDError").text("Không được để trống!");
-                        return;
-                    } else {
-                        if (!regRegisterName.test(registerName)) {
-                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
-                            return;
-                        } else if (!regRegisterPWD.test(registerPWD)) {
-                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
-                            return;
-                        } else if (registerRePWD != registerPWD) {
-                            $("#RePWDError").text("Không khớp với mật khẩu!");
-                            return;
-                        }
-                    }
-
-                    //  lưu tài khoản
-                    var user = {
-                        username: registerName,
-                        password: registerPWD
-                    };
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    //  lưu trạng thái đang đăng nhập luôn
-                    localStorage.setItem("currentUser", registerName);
-
-                    alert("Đăng ký thành công!");
-
-                    // đóng modal
-                    $("#authModal").modal("hide");
-                });
-
-                var currentUser = localStorage.getItem("currentUser");
-
-                if (currentUser) {
-                    console.log("Đang đăng nhập:", currentUser);
-                }
-
-            });
-
-            $('#authModal').on('show.bs.modal', function () {
-                $(this).find("input").val("");
-                $(this).find("span").text("");
-                $("#registerForm").hide();
-                $("#loginName, #pwd, #btnLogin").show();
-                $("#helpRegister").show();
-                $("#modalTitle").text("Đăng nhập");
-            });
-
-
-        </script>
 
         <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
             role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -282,14 +152,17 @@
                                     <div class="col-md-6">
                                         <label for="partyName" class="form-label">Họ và tên *</label>
                                         <input type="text" class="form-control" id="partyName" required>
+                                        <div class="text-danger" id="nameError"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="partyPhone" class="form-label">Số điện thoại *</label>
                                         <input type="tel" class="form-control" id="partyPhone" required>
+                                        <div class="text-danger" id="phoneError"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="partyEmail" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="partyEmail">
+                                        <div class="text-danger" id="emailError"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="partyGuests" class="form-label">Số lượng khách *</label>
@@ -304,6 +177,7 @@
                                             <option value="70">70 khách</option>
                                             <option value="100">100 khách</option>
                                         </select>
+                                        <div class="text-danger" id="guestError"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="partyDate" class="form-label">Ngày tổ chức *</label>
@@ -493,38 +367,81 @@
             document.getElementById('partyForm').addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                const name = document.getElementById('partyName').value;
-                const phone = document.getElementById('partyPhone').value;
-                const email = document.getElementById('partyEmail').value || 'Chưa cung cấp';
-                const guests = parseInt(document.getElementById('partyGuests').value, 10);
+                let isValid = true;
+
+                // lấy dữ liệu
+                const name = document.getElementById('partyName').value.trim();
+                const phone = document.getElementById('partyPhone').value.trim();
+                const email = document.getElementById('partyEmail').value.trim();
+                const guests = document.getElementById('partyGuests').value;
                 const date = document.getElementById('partyDate').value;
                 const time = document.getElementById('partyTime').value;
                 const type = document.getElementById('partyType').value;
+
+                // regex
+                const regPhone = /^0\d{9}$/;
+                const regEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // reset lỗi
+                document.getElementById('nameError').innerText = "";
+                document.getElementById('phoneError').innerText = "";
+                document.getElementById('emailError').innerText = "";
+                document.getElementById('guestError').innerText = "";
+
+                // validate
+                if (name === "") {
+                    document.getElementById('nameError').innerText = "Không được để trống!";
+                    isValid = false;
+                }
+
+                if (!regPhone.test(phone)) {
+                    document.getElementById('phoneError').innerText = "SĐT phải 10 số và bắt đầu bằng 0!";
+                    isValid = false;
+                }
+
+                if (email !== "" && !regEmail.test(email)) {
+                    document.getElementById('emailError').innerText = "Email không hợp lệ!";
+                    isValid = false;
+                }
+
+                if (guests === "") {
+                    document.getElementById('guestError').innerText = "Vui lòng chọn số khách!";
+                    isValid = false;
+                }
+
+                if (date === "" || time === "" || type === "") {
+                    alert("Vui lòng chọn đầy đủ ngày, giờ và loại tiệc!");
+                    isValid = false;
+                }
+
+                // nếu có lỗi thì dừng
+                if (!isValid) return;
+
+                // 👉 nếu hợp lệ thì chạy code cũ (hiển thị modal)
                 const combo = document.querySelector('input[name="menuCombo"]:checked')?.value || 'Không chọn';
                 const requests = document.getElementById('partyRequests').value || 'Không có yêu cầu đặc biệt';
 
-                const pricePerPerson = combo === 'Combo Vàng' ? 120000 : combo === 'Combo Bạc' ? 150000 : combo === 'Combo Kim Cương' ? 200000 : 0;
+                const pricePerPerson = combo === 'Combo Vàng' ? 120000 :
+                    combo === 'Combo Bạc' ? 150000 :
+                        combo === 'Combo Kim Cương' ? 200000 : 0;
+
                 const totalPrice = guests * pricePerPerson;
 
                 const summary = `
-                    <div class="mt-3 p-3 bg-light rounded">
-                        <p><strong>Họ tên:</strong> ${name}</p>
-                        <p><strong>Số điện thoại:</strong> ${phone}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Số khách:</strong> ${guests} người</p>
-                        <p><strong>Ngày:</strong> ${new Date(date).toLocaleDateString('vi-VN')}</p>
-                        <p><strong>Giờ:</strong> ${time}</p>
-                        <p><strong>Loại tiệc:</strong> ${type}</p>
-                        <p><strong>Combo:</strong> ${combo}</p>
-                        <p><strong>Giá theo đầu người:</strong> ${pricePerPerson.toLocaleString('vi-VN')}đ</p>
-                        <p><strong>Tổng giá dự kiến:</strong> ${totalPrice.toLocaleString('vi-VN')}đ</p>
-                        <p><strong>Yêu cầu:</strong> ${requests}</p>
-                    </div>
-                `;
+        <div class="mt-3 p-3 bg-light rounded">
+            <p><strong>Họ tên:</strong> ${name}</p>
+            <p><strong>SĐT:</strong> ${phone}</p>
+            <p><strong>Email:</strong> ${email || 'Chưa có'}</p>
+            <p><strong>Số khách:</strong> ${guests}</p>
+            <p><strong>Tổng:</strong> ${totalPrice.toLocaleString()}đ</p>
+        </div>
+    `;
 
                 document.getElementById('partySummary').innerHTML = summary;
+
                 const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
                 confirmModal.show();
+
                 this.reset();
             });
 
@@ -578,6 +495,17 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        $('#authModal').on('show.bs.modal', function () {
+            $(this).find("input").val("");
+            $(this).find("span").text("");
+            $("#registerForm").hide();
+            $("#loginName, #pwd, #btnLogin").show();
+            $("#helpRegister").show();
+            $("#modalTitle").text("Đăng nhập");
+        });
+    </script>
 </body>
 
 </html>

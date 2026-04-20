@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../CSS/home_style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../JS/jquery-4.0.0.min.js"></script>
+    <script src="../JS/signIn_signUp.js"></script>
+</head>
+
+<body>
+    <div id="container">
+
+        <nav class="navbar navbar-expand-sm sticky-top" id="top">
+            <div class="container">
+
+                <div>
+                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="toilay.html">Tới Lấy</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" id="userIcon" style="cursor:pointer;"></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal button của "Đặt món ngay" -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="giaohang.html">
+                            <button class="btn btn-primary w-100 mb-2"> 🚚 Giao Hàng </button>
+                        </a>
+                        <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">
+                            🛍 TớiLấy
+                        </button>
+                        <a href="#">
+                            <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
+                        </a>
+                        <a href="dattiec.html">
+                            <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        </a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" id="loginName" placeholder="Tên Đăng Nhập">
+                        <span id="loginError"></span>
+                        <input type="password" class="form-control mb-2" id="pwd" placeholder="Mật khẩu">
+                        <span id="pwdError"></span>
+                        <button class="btn btn-primary w-100" type="button" id="btnLogin">Đăng nhập</button>
+
+                        <p class="text-center mt-2" id="helpRegister">
+                            Chưa có tài khoản?
+                            <a href="#" id="showRegister">Đăng ký</a>
+                        </p>
+
+                        <!-- FORM ĐĂNG KÝ (ẩn ban đầu) -->
+                        <div id="registerForm" style="display:none;">
+                            <input type="text" class="form-control mb-2" id="registerName" placeholder="Tên Đăng Nhập">
+                            <span id="registerError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerPWD" placeholder="Mật khẩu">
+                            <span id="registerPWDError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerRePWD"
+                                placeholder="Xác nhận lại mật khẩu">
+                            <span id="RePWDError"></span>
+
+                            <button class="btn btn-success w-100" type="button" id="btnRegister">Đăng ký</button>
+
+                            <p class="text-center mt-2">
+                                Đã có tài khoản?
+                                <a href="#" id="showLogin">Đăng nhập</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container mt-5 mb-5">
+            <h2 class="text-center fw-bold" style="color: #7d2905; text-transform: uppercase;">Chương Trình Khuyến Mãi
+            </h2>
+            <hr class="hrSection" style="width: 100px; margin: 10px auto; background-color: #391200; height: 5px;">
+
+            <div class="row g-4 mt-3">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm" style="border-radius: 20px; overflow: hidden;">
+                        <img src="" alt="Poster Khuyến Mãi 1" class="w-100"
+                            style="height: 350px; object-fit: cover; background-color: #ddd;">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm" style="border-radius: 20px; overflow: hidden;">
+                        <img src="" alt="Poster Khuyến Mãi 2" class="w-100"
+                            style="height: 350px; object-fit: cover; background-color: #ddd;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
+                <div class="row">
+
+                    <!-- Thông tin quán -->
+                    <div class="col-md-4">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/facebook.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/instagram.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/youtube.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/tiktok.png" alt="">
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Liên kết -->
+                    <div class="col-md-2">
+                        <h5>Liên kết</h5>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Liên hệ -->
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò
+                            Vấp, TP.HCM</p>
+                    </div>
+
+                    <!-- Giờ mở cửa -->
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt=""> 08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt=""> Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+
+                </div>
+
+                <hr class="bg-light">
+
+                <p class="text-center mb-0">
+                    © 2026 Quán Anh 3. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        $('#authModal').on('show.bs.modal', function () {
+            $(this).find("input").val("");
+            $(this).find("span").text("");
+            $("#registerForm").hide();
+            $("#loginName, #pwd, #btnLogin").show();
+            $("#helpRegister").show();
+            $("#modalTitle").text("Đăng nhập");
+        });
+    </script>
+</body>

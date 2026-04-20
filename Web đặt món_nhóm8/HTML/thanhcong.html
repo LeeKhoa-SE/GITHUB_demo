@@ -13,6 +13,7 @@
 
     <script src="../JS/bootstrap.bundle.min.js"></script>
     <script src="../JS/jquery-4.0.0.min.js"></script>
+    <script src="../JS/signIn_signUp.js"></script>
 
     <title>Thành công</title>
 
@@ -166,127 +167,8 @@
             </div>
         </div>
 
-        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
+
         <script>
-            $(document).ready(function () {
-
-                $("#userIcon").click(function () {
-                    var currentUser = localStorage.getItem("currentUser");
-                    if (!currentUser) {
-                        //  chưa login → mở modal
-                        $("#authModal").modal("show");
-                    } else {
-                        //  đã login → hỏi đăng xuất
-                        if (confirm("Bạn có muốn đăng xuất không?")) {
-                            localStorage.removeItem("currentUser");
-                            alert("Đã đăng xuất!");
-                        }
-                    }
-                });
-
-                $("#showRegister").click(function (e) {
-                    e.preventDefault();
-                    $("#helpRegister").hide();
-                    $("#loginName, #pwd, #btnLogin").hide();
-                    $("#loginError, #pwdError").hide();
-                    $("#registerForm").show();
-                    $("#modalTitle").text("Đăng ký")
-                });
-
-                $("#showLogin").click(function (e) {
-                    e.preventDefault();
-                    $("#loginName, #pwd, #btnLogin").show();
-                    $("#loginError, #pwdError").show();
-                    $("#helpRegister").show();
-                    $("#modalTitle").text("Đăng nhập")
-                    $("#registerForm").hide();
-                });
-
-                $("#btnLogin").click(function (e) {
-                    e.preventDefault();
-                    var loginName = ($("#loginName").val());
-                    var pwd = ($("#pwd").val());
-                    $("#loginError").text("");
-                    $("#pwdError").text("");
-                    if (loginName == "") {
-                        $("#loginError").text("Không được để trống!");
-                        return;
-                    } else if (pwd == "") {
-                        $("#pwdError").text("Không được để trống!");
-                        return;
-                    } else {
-                        var user = JSON.parse(localStorage.getItem("user"));
-
-                        if (!user || user.username !== loginName || user.password !== pwd) {
-                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
-                            return;
-                        }
-
-                        //  login thành công
-                        localStorage.setItem("currentUser", loginName);
-
-                        alert("Đăng nhập thành công!");
-                        $("#authModal").modal("hide");
-                    }
-                });
-
-                $("#btnRegister").click(function (e) {
-                    e.preventDefault();
-                    var regRegisterName = /^[A-Za-z\d]+$/;
-                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
-
-                    var registerName = ($("#registerName").val());
-                    var registerPWD = ($("#registerPWD").val());
-                    var registerRePWD = ($("#registerRePWD").val());
-                    $("#registerError").text("");
-                    $("#registerPWDError").text("");
-                    $("#RePWDError").text("");
-                    if (registerName == "") {
-                        $("#registerError").text("Không được để trống!");
-                        return;
-                    } else if (registerPWD == "") {
-                        $("#registerPWDError").text("Không được để trống!");
-                        return;
-                    } else if (registerRePWD == "") {
-                        $("#RePWDError").text("Không được để trống!");
-                        return;
-                    } else {
-                        if (!regRegisterName.test(registerName)) {
-                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
-                            return;
-                        } else if (!regRegisterPWD.test(registerPWD)) {
-                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
-                            return;
-                        } else if (registerRePWD != registerPWD) {
-                            $("#RePWDError").text("Không khớp với mật khẩu!");
-                            return;
-                        }
-                    }
-
-                    //  lưu tài khoản
-                    var user = {
-                        username: registerName,
-                        password: registerPWD
-                    };
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    //  lưu trạng thái đang đăng nhập luôn
-                    localStorage.setItem("currentUser", registerName);
-
-                    alert("Đăng ký thành công!");
-
-                    // đóng modal
-                    $("#authModal").modal("hide");
-                });
-
-                var currentUser = localStorage.getItem("currentUser");
-
-                if (currentUser) {
-                    console.log("Đang đăng nhập:", currentUser);
-                }
-
-            });
-
             $('#authModal').on('show.bs.modal', function () {
                 $(this).find("input").val("");
                 $(this).find("span").text("");
@@ -295,8 +177,6 @@
                 $("#helpRegister").show();
                 $("#modalTitle").text("Đăng nhập");
             });
-
-
         </script>
 
 
@@ -309,7 +189,7 @@
                 <h2>
                     Đặt hàng thành công 🎉
                 </h2>
-
+                <div id="order-detail" class="mt-4 text-start"></div>
                 <p>
                     Đơn hàng của bạn đang được chuẩn bị
                 </p>
@@ -402,7 +282,46 @@
 
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            let order = JSON.parse(localStorage.getItem("lastOrder"));
+            let container = document.getElementById("order-detail");
+
+            if (!order) {
+                container.innerHTML = "<p>Không có dữ liệu đơn hàng.</p>";
+                return;
+            }
+
+            let html = `
+        <h5>Chi tiết đơn hàng</h5>
+        <hr>
+    `;
+
+            order.items.forEach(item => {
+                html += `
+            <div class="d-flex align-items-center mb-2">
+                <img src="${item.img}" style="width:50px;height:50px;object-fit:cover">
+                <div class="ms-2 flex-grow-1">
+                    <div>${item.name}</div>
+                    <small>${item.quantity} x ${item.price.toLocaleString()}đ</small>
+                </div>
+                <div>
+                    ${(item.price * item.quantity).toLocaleString()}đ
+                </div>
+            </div>
+        `;
+            });
+
+            html += `
+        <hr>
+        <h6 class="text-end">Tổng: ${order.total.toLocaleString()}đ</h6>
+    `;
+
+            container.innerHTML = html;
+
+        });
+    </script>
 </body>
 
 </html>

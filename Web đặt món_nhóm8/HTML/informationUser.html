@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../CSS/home_style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="../JS/jquery-4.0.0.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+
+        <nav class="navbar navbar-expand-sm sticky-top" id="top">
+            <div class="container">
+
+                <div>
+                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" aria-current="page">Trang Chủ
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Thực Đơn</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
+                                <a class="dropdown-item" href="toilay.html">Tới Lấy</a>
+                                <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
+                                <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a class="navbar-brand" href="#">
+                        <button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modalId"
+                            id="button_order">
+                            Đặt Món Ngay
+                        </button>
+                    </a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="ms-auto" id="user">
+                        <ul>
+                            <li><a href=""><img src="../IMG/HomePage/bell.png" alt=""></a></li>
+                            <li><a href="giohang.html"><img src="../IMG/HomePage/wicker-basket.png" alt=""></a></li>
+                            <li><img src="../IMG/HomePage/user.png" alt="" id="userIcon" style="cursor:pointer;"></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Modal button của "Đặt món ngay" -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Chọn Dịch Vụ
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="giaohang.html">
+                            <button class="btn btn-primary w-100 mb-2"> 🚚 Giao Hàng </button>
+                        </a>
+                        <button class="btn btn-success w-100 mb-2" onclick="selectService('pickup')">
+                            🛍 TớiLấy
+                        </button>
+                        <a href="#">
+                            <button class="btn btn-warning w-100 mb-2"> 🍽 Ăn Tại Chỗ</button>
+                        </a>
+                        <a href="dattiec.html">
+                            <button class="btn btn-danger w-100 mb-2"> 🎉 Đặt Tiệc</button>
+                        </a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
+        <div class="modal fade" id="authModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Đăng nhập</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" id="loginName" placeholder="Tên Đăng Nhập">
+                        <span id="loginError"></span>
+                        <input type="password" class="form-control mb-2" id="pwd" placeholder="Mật khẩu">
+                        <span id="pwdError"></span>
+                        <button class="btn btn-primary w-100" type="button" id="btnLogin">Đăng nhập</button>
+
+                        <p class="text-center mt-2" id="helpRegister">
+                            Chưa có tài khoản?
+                            <a href="#" id="showRegister">Đăng ký</a>
+                        </p>
+
+                        <!-- FORM ĐĂNG KÝ (ẩn ban đầu) -->
+                        <div id="registerForm" style="display:none;">
+                            <input type="text" class="form-control mb-2" id="registerName" placeholder="Tên Đăng Nhập">
+                            <span id="registerError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerPWD" placeholder="Mật khẩu">
+                            <span id="registerPWDError"></span>
+
+                            <input type="password" class="form-control mb-2" id="registerRePWD"
+                                placeholder="Xác nhận lại mật khẩu">
+                            <span id="RePWDError"></span>
+
+                            <button class="btn btn-success w-100" type="button" id="btnRegister">Đăng ký</button>
+
+                            <p class="text-center mt-2">
+                                Đã có tài khoản?
+                                <a href="#" id="showLogin">Đăng nhập</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container mt-5 mb-5" style="max-width: 850px;">
+            <h2 class="text-center fw-bold mb-4" style="color: #7d2905;">HỒ SƠ CỦA TÔI</h2>
+
+            <div class="card p-4 border-0 shadow-sm" style="background-color: #ffffff; border-radius: 20px;">
+                <div class="row">
+
+                    <div
+                        class="col-md-4 text-center border-end mb-4 mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                        <img src="../IMG/HomePage/user.png" alt="Avatar"
+                            class="rounded-circle img-thumbnail mb-3 shadow-sm"
+                            style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #f1ebe4;">
+                        <button class="btn btn-outline-secondary btn-sm rounded-pill fw-bold px-3">Chọn ảnh mới</button>
+                        <p class="text-muted mt-2" style="font-size: 13px;">Dung lượng file tối đa 1 MB<br>Định dạng:
+                            .JPEG, .PNG</p>
+                    </div>
+
+                    <div class="col-md-8 ps-md-4">
+                        <form id="profileForm">
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Tên đăng nhập</label>
+                                    <input type="text" id="infoUsername" class="form-control bg-light" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Email</label>
+                                    <input type="email" id="infoEmail" class="form-control"
+                                        placeholder="Nhập địa chỉ email">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Họ và tên</label>
+                                    <input type="text" id="infoFullName" class="form-control"
+                                        placeholder="Nhập họ và tên">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Số điện thoại</label>
+                                    <input type="text" id="infoPhone" class="form-control"
+                                        placeholder="Nhập số điện thoại">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Giới tính</label>
+                                    <select id="infoGender" class="form-select">
+                                        <option value="" selected disabled>Chọn giới tính</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label fw-bold" style="color: #5e2006;">Ngày sinh</label>
+                                    <input type="date" id="infoDOB" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold" style="color: #5e2006;">Địa chỉ giao hàng mặc
+                                    định</label>
+                                <textarea id="infoAddress" class="form-control" rows="2"
+                                    placeholder="Nhập địa chỉ nhận hàng"></textarea>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="button" id="btnSaveProfile" class="btn text-white fw-bold flex-grow-1"
+                                    style="background-color: #F59E0B; border-radius: 10px;">Lưu Thay Đổi</button>
+                                <button type="button" class="btn btn-secondary fw-bold" style="border-radius: 10px;"
+                                    data-bs-toggle="modal" data-bs-target="#changePasswordModal">Đổi Mật Khẩu</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <hr class="mt-4 mb-3" style="background-color: #e4b159; height: 2px; border: none;">
+
+                <div class="text-end">
+                    <button id="btnLogout" class="btn btn-outline-danger fw-bold px-4" style="border-radius: 10px;">Đăng
+                        Xuất</button>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                let currentUser = localStorage.getItem("currentUser");
+                if (!currentUser) {
+                    window.location.href = "home.html"; // Chưa đăng nhập thì đuổi về home
+                } else {
+                    $("#infoUsername").val(currentUser);
+                }
+
+                // Xử lý đăng xuất
+                $("#btnLogout").click(function () {
+                    localStorage.removeItem("currentUser");
+                    window.location.href = "home.html";
+                    alert("Đăng xuất thành công");
+                });
+
+                // Xử lý đổi mật khẩu
+                $("#btnSavePassword").click(function () {
+                    let oldPwd = $("#oldPwd").val();
+                    let newPwd = $("#newPwd").val();
+                    let confirmPwd = $("#confirmNewPwd").val();
+                    let regPwd = /^(?=.*[A-Z]).{8,}$/; // Regex: ít nhất 8 ký tự, 1 in hoa (giống form đăng ký của bạn)
+
+                    // Xóa lỗi cũ
+                    $("#oldPwdError, #newPwdError, #confirmNewPwdError").text("");
+
+                    let isValid = true;
+                    let storedUser = JSON.parse(localStorage.getItem("user"));
+
+                    // Validate mật khẩu cũ
+                    if (oldPwd === "") {
+                        $("#oldPwdError").text("Không được để trống!");
+                        isValid = false;
+                    } else if (storedUser && storedUser.password !== oldPwd) {
+                        $("#oldPwdError").text("Mật khẩu hiện tại không đúng!");
+                        isValid = false;
+                    }
+
+                    // Validate mật khẩu mới
+                    if (newPwd === "") {
+                        $("#newPwdError").text("Không được để trống!");
+                        isValid = false;
+                    } else if (!regPwd.test(newPwd)) {
+                        $("#newPwdError").text("Mật khẩu phải có tối thiểu 8 ký tự và ít nhất 1 chữ in hoa!");
+                        isValid = false;
+                    } else if (newPwd === oldPwd) {
+                        $("#newPwdError").text("Mật khẩu mới không được trùng mật khẩu cũ!");
+                        isValid = false;
+                    }
+
+                    // Validate xác nhận mật khẩu
+                    if (confirmPwd === "") {
+                        $("#confirmNewPwdError").text("Không được để trống!");
+                        isValid = false;
+                    } else if (confirmPwd !== newPwd) {
+                        $("#confirmNewPwdError").text("Không khớp với mật khẩu mới!");
+                        isValid = false;
+                    }
+
+                    // Nếu hợp lệ -> Cập nhật localStorage
+                    if (isValid) {
+                        storedUser.password = newPwd;
+                        localStorage.setItem("user", JSON.stringify(storedUser)); // Lưu lại vào bộ nhớ
+
+                        alert("Đổi mật khẩu thành công!");
+                        $("#changePasswordModal").modal("hide"); // Đóng modal
+                    }
+                });
+
+                // Làm sạch form mỗi khi đóng Modal
+                $('#changePasswordModal').on('hidden.bs.modal', function () {
+                    $(this).find('input').val('');
+                    $(this).find('.text-danger').text('');
+                });
+
+                // 1. Tự động đổ dữ liệu cũ ra form khi vừa vào trang
+                function loadUserData() {
+                    let currentUser = localStorage.getItem("currentUser");
+                    let storedUser = JSON.parse(localStorage.getItem("user"));
+
+                    if (storedUser && storedUser.username === currentUser) {
+                        $("#infoUsername").val(storedUser.username);
+                        $("#infoEmail").val(storedUser.email || "");
+                        $("#infoFullName").val(storedUser.fullName || "");
+                        $("#infoPhone").val(storedUser.phone || "");
+                        $("#infoGender").val(storedUser.gender || "");
+                        $("#infoDOB").val(storedUser.dob || "");
+                        $("#infoAddress").val(storedUser.address || "");
+                    }
+                }
+
+                // Gọi hàm load dữ liệu ngay khi trang sẵn sàng
+                loadUserData();
+
+                // 2. Xử lý khi nhấn nút "Lưu Thay Đổi"
+                $("#btnSaveProfile").click(function () {
+                    let currentUser = localStorage.getItem("currentUser");
+                    let storedUser = JSON.parse(localStorage.getItem("user"));
+
+                    // Kiểm tra xem có đúng user đang đăng nhập không
+                    if (storedUser && storedUser.username === currentUser) {
+                        // Cập nhật các thông tin mới vào object storedUser
+                        storedUser.email = $("#infoEmail").val();
+                        storedUser.fullName = $("#infoFullName").val();
+                        storedUser.phone = $("#infoPhone").val();
+                        storedUser.gender = $("#infoGender").val();
+                        storedUser.dob = $("#infoDOB").val();
+                        storedUser.address = $("#infoAddress").val();
+
+                        // Lưu ngược lại vào localStorage
+                        localStorage.setItem("user", JSON.stringify(storedUser));
+
+                        alert("Thông tin cá nhân đã được cập nhật thành công!");
+                    } else {
+                        alert("Lỗi: Không tìm thấy thông tin người dùng!");
+                    }
+                });
+            });
+        </script>
+
+
+        <footer class="py-4 mt-5 bg-dark text-light">
+            <div class="container" style="text-align: left;">
+                <div class="row">
+
+                    <!-- Thông tin quán -->
+                    <div class="col-md-4">
+                        <h5>Quán Anh 3</h5>
+                        <p>Đặt món nhanh - Đồ ăn ngon - Giao hàng tận nơi</p>
+                        <br>
+                        <h5>Kết nối</h5>
+                        <p id="MXH">
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/facebook.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/instagram.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/youtube.png" alt="">
+                            </a>
+                            <a href="#" class="text-light text-decoration-none">
+                                <img style="width: 40px;" src="../IMG/HomePage/tiktok.png" alt="">
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Liên kết -->
+                    <div class="col-md-2">
+                        <h5>Liên kết</h5>
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none text-light" href="menu.html">Thực Đơn</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Khuyến Mãi</a></li>
+                            <li><a class="text-decoration-none text-light" href="#">Dịch Vụ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Liên hệ -->
+                    <div class="col-md-3">
+                        <h5>Liên hệ</h5>
+                        <p><img src="../IMG/HomePage/telephone.png" style="width: 20px;" alt=""> 0909 123 456</p>
+                        <p><img src="../IMG/HomePage/placeholder.png" style="width: 20px;" alt=""> 1 Nguyễn Văn Bảo,
+                            quận Gò
+                            Vấp, TP.HCM</p>
+                    </div>
+
+                    <!-- Giờ mở cửa -->
+                    <div class="col-md-3">
+                        <h5>Giờ mở cửa</h5>
+                        <p><img src="../IMG/HomePage/clock.png" style="width: 20px;" alt=""> 08:00 - 22:00</p>
+                        <p><img src="../IMG/HomePage/schedule.png" style="width: 20px;" alt=""> Tất cả các ngày trong
+                            tuần</p>
+                    </div>
+
+                </div>
+
+                <hr class="bg-light">
+
+                <p class="text-center mb-0">
+                    © 2026 Quán Anh 3. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #eddac1;">
+                    <h5 class="modal-title fw-bold" id="changePasswordModalLabel" style="color: #7d2905;">Đổi Mật Khẩu
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="background-color: #f1ebe4;">
+                    <div class="mb-3 text-start">
+                        <input type="password" class="form-control" id="oldPwd" placeholder="Mật khẩu hiện tại">
+                        <span id="oldPwdError" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3 text-start">
+                        <input type="password" class="form-control" id="newPwd"
+                            placeholder="Mật khẩu mới (Tối thiểu 8 ký tự, 1 chữ in hoa)">
+                        <span id="newPwdError" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3 text-start">
+                        <input type="password" class="form-control" id="confirmNewPwd"
+                            placeholder="Xác nhận lại mật khẩu mới">
+                        <span id="confirmNewPwdError" class="text-danger small"></span>
+                    </div>
+                    <button class="btn btn-warning w-100 fw-bold text-white" type="button" id="btnSavePassword"
+                        style="background-color: #F59E0B; border: none;">Xác Nhận Đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
