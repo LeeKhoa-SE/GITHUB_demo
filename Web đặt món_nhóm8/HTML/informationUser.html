@@ -19,14 +19,14 @@
             <div class="container">
 
                 <div>
-                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                    <a href="index.html"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="#" aria-current="page">Trang Chủ
+                            <a class="nav-link active" href="index.html" aria-current="page">Trang Chủ
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -35,7 +35,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                            <a class="nav-link" href="khuyenmai.html">Khuyến Mãi</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -249,7 +249,7 @@
             $(document).ready(function () {
                 let currentUser = localStorage.getItem("currentUser");
                 if (!currentUser) {
-                    window.location.href = "home.html"; // Chưa đăng nhập thì đuổi về home
+                    window.location.href = "index.html"; // Chưa đăng nhập thì đuổi về home
                 } else {
                     $("#infoUsername").val(currentUser);
                 }
@@ -257,7 +257,7 @@
                 // Xử lý đăng xuất
                 $("#btnLogout").click(function () {
                     localStorage.removeItem("currentUser");
-                    window.location.href = "home.html";
+                    window.location.href = "index.html";
                     alert("Đăng xuất thành công");
                 });
 

@@ -5,16 +5,16 @@
 
 // 1. Dữ liệu menu (Khớp chính xác với thứ tự các nút "+ Thêm" trong HTML)
 const menuData = [
-    { id: 1, name: 'Phở Bò Tái', price: 85000 },
-    { id: 2, name: 'Cơm Tấm Sườn Bì Chả', price: 75000 },
-    { id: 3, name: 'Bún Bò Huế', price: 85000 },
-    { id: 4, name: 'Hủ Tiếu', price: 75000 }
+    { id: 1, name: 'Phở Bò Tái', price: 55000 },
+    { id: 2, name: 'Cơm Tấm Sườn Bì Chả', price: 55000 },
+    { id: 3, name: 'Bún Bò Huế', price: 65000 },
+    { id: 4, name: 'Hủ Tiếu', price: 55000 }
 ];
 
 // 2. Trạng thái ứng dụng
 let state = {
     cart: [
-        { id: 2, name: 'Cơm Tấm Sườn Bì Chả', price: 75000, quantity: 1, img: '../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg' }
+
     ],
     shippingFee: 15000,
     deliveryInfo: {
@@ -78,8 +78,12 @@ const DeliveryApp = {
                     return;
                 }
 
-                // Nếu mọi thứ ổn, thông tin sẽ được lưu trước khi chuyển trang (nếu cần)
-                this.saveDeliveryDetails(false);
+                // 1. Lưu địa chỉ và giỏ hàng (từ state.cart) xuống localStorage
+                localStorage.setItem("deliveryAddress", addressInput.value.trim());
+                localStorage.setItem("cart", JSON.stringify(state.cart));
+
+                // 2. Chuyển sang trang checkout
+                window.location.href = "checkout.html";
             };
         }
 

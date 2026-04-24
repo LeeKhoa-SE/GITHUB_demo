@@ -28,14 +28,14 @@
             <div class="container">
 
                 <div>
-                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                    <a href="index.html"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ
+                            <a class="nav-link active" href="index.html" aria-current="page">Trang Chủ
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -171,7 +171,7 @@
 
         <div class="container mt-4 mb-5">
 
-            <h2 class="checkout-title text-center">Thanh toán</h2>
+            <h2 class="checkout-title text-center" style="color: #7d2905;">Thanh toán</h2>
 
             <form id="checkoutForm" class="checkout-box p-4">
 
@@ -245,6 +245,24 @@
 
         <script>
             $(document).ready(function () {
+
+                // 1. Lấy thông tin hồ sơ người dùng (chứa địa chỉ mặc định)
+                let storedUser = JSON.parse(localStorage.getItem("user"));
+                let defaultAddress = (storedUser && storedUser.address) ? storedUser.address : "";
+
+                // 2. Lấy địa chỉ tạm từ dịch vụ Giao Hàng / Tới Lấy
+                let serviceAddress = localStorage.getItem("deliveryAddress");
+
+                if (serviceAddress) {
+                    // Nếu đi từ trang dịch vụ -> Dùng địa chỉ dịch vụ
+                    $("#address").val(serviceAddress);
+
+                    // QUAN TRỌNG: Xóa ngay sau khi dùng để không bị dính cho các đơn hàng bình thường sau này
+                    localStorage.removeItem("deliveryAddress");
+                } else {
+                    // Nếu mua bình thường từ giỏ hàng -> Dùng địa chỉ mặc định trong hồ sơ (nếu không có thì tự để trống)
+                    $("#address").val(defaultAddress);
+                }
 
                 $("#checkoutForm").submit(function (e) {
                     e.preventDefault();
@@ -340,7 +358,8 @@
 
                 let total = 0;
                 let FREE_SHIP_THRESHOLD = 100000; // 👉 mốc freeship
-                let shippingFee = 15000;
+                let serviceType = localStorage.getItem("serviceType");
+                let shippingFee = (serviceType === "pickup") ? 0 : 15000;
 
                 if (cartData.length === 0) {
                     listContainer.html("<p class='text-center text-muted'>Không có dữ liệu đơn hàng.</p>");
@@ -365,7 +384,7 @@
                     });
 
                     // 👉 CHECK FREESHIP
-                    let isFreeShip = total >= FREE_SHIP_THRESHOLD;
+                    let isFreeShip = (total >= FREE_SHIP_THRESHOLD) || (serviceType === "pickup");
                     let finalShipping = isFreeShip ? 0 : shippingFee;
 
                     // 👉 HIỂN THỊ PHÍ SHIP

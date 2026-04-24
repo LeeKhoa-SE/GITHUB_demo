@@ -19,13 +19,13 @@
         <nav class="navbar navbar-expand-sm sticky-top" id="top">
             <div class="container">
                 <div>
-                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                    <a href="index.html"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ
+                            <a class="nav-link active" href="index.html" aria-current="page">Trang Chủ
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -198,10 +198,10 @@
                         <div class="row g-3 overflow-auto" style="max-height: 500px;">
                             <div class="col-6">
                                 <div class="card border p-2 h-100 shadow-sm">
-                                    <img src="../IMG/GioHang/Pho Bo_ schnelles, einfaches und leckeres Rezept.jpg"
-                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <img src="../IMG/HomePage/pho.png" class="card-img-top rounded mb-2"
+                                        style="height: 100px; object-fit: cover;">
                                     <div class="small fw-bold text-truncate">Phở Bò Tái</div>
-                                    <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                    <div class="text-danger fw-bold mb-2">55.000đ</div>
                                     <button class="btn btn-warning btn-sm text-white fw-bold"
                                         onclick="DeliveryApp.addToCart('Phở Bò Tái', 85000, '../IMG/GioHang/pho.jpg')">
                                         + Thêm
@@ -210,10 +210,10 @@
                             </div>
                             <div class="col-6">
                                 <div class="card border p-2 h-100 shadow-sm">
-                                    <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg"
-                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <img src="../IMG/HomePage/comtam.jpg" class="card-img-top rounded mb-2"
+                                        style="height: 100px; object-fit: cover;">
                                     <div class="small fw-bold text-truncate">Cơm Tấm Sườn Bì Chả</div>
-                                    <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                    <div class="text-danger fw-bold mb-2">55.000đ</div>
                                     <button class="btn btn-warning btn-sm text-white fw-bold"
                                         onclick="DeliveryApp.addToCart('Phở Bò Tái', 85000, '../IMG/GioHang/pho.jpg')">
                                         + Thêm
@@ -222,10 +222,10 @@
                             </div>
                             <div class="col-6">
                                 <div class="card border p-2 h-100 shadow-sm">
-                                    <img src="../IMG/GioHang/Bún Bò Huế.jpg" class="card-img-top rounded mb-2"
+                                    <img src="../IMG/HomePage/bunbo.jpg" class="card-img-top rounded mb-2"
                                         style="height: 100px; object-fit: cover;">
                                     <div class="small fw-bold text-truncate">Bún Bò Huế</div>
-                                    <div class="text-danger fw-bold mb-2">85.000đ</div>
+                                    <div class="text-danger fw-bold mb-2">60.000đ</div>
                                     <button class="btn btn-warning btn-sm text-white fw-bold"
                                         onclick="DeliveryApp.addToCart('Phở Bò Tái', 85000, '../IMG/GioHang/pho.jpg')">
                                         + Thêm
@@ -234,10 +234,10 @@
                             </div>
                             <div class="col-6">
                                 <div class="card border p-2 h-100 shadow-sm">
-                                    <img src="../IMG/GioHang/hu tieu - vietnamese pork and seafood noodle soup - glebe kitchen.jpg"
-                                        class="card-img-top rounded mb-2" style="height: 100px; object-fit: cover;">
+                                    <img src="../IMG/HomePage/hutieu.png" class="card-img-top rounded mb-2"
+                                        style="height: 100px; object-fit: cover;">
                                     <div class="small fw-bold text-truncate">Hủ Tiếu</div>
-                                    <div class="text-danger fw-bold mb-2">75.000đ</div>
+                                    <div class="text-danger fw-bold mb-2">55.000đ</div>
                                     <button class="btn btn-warning btn-sm text-white fw-bold"
                                         onclick="DeliveryApp.addToCart('Phở Bò Tái', 85000, '../IMG/GioHang/pho.jpg')">
                                         + Thêm
@@ -252,22 +252,7 @@
                     <div class="card border-0 shadow-sm p-4 h-100">
                         <h6 class="fw-bold mb-4 border-bottom pb-2">3. GIỎ HÀNG</h6>
                         <div class="flex-grow-1 overflow-auto mb-4" style="max-height: 300px;">
-                            <div class="d-flex align-items-center mb-3 border-bottom pb-2">
-                                <img src="../IMG/GioHang/Cơm Tấm Sườn Bì Chả - Nguyen Giao.jpg" class="rounded me-2"
-                                    width="50" height="50">
-                                <div class="flex-grow-1">
-                                    <div class="fw-bold" style="font-size: 0.8rem;">Cơm Tấm Sườn Bì Chả
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mt-1">
-                                        <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-light border">-</button>
-                                            <span class="px-2">1</span>
-                                            <button class="btn btn-light border">+</button>
-                                        </div>
-                                        <span class="small fw-bold">75.000đ</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Nơi JS render các món ăn được thêm vào -->
                         </div>
 
                         <div class="border-top pt-3">
@@ -280,7 +265,7 @@
                                 <span class="text-success">0đ</span>
                             </div>
                             <button class="btn w-100 mt-auto py-2 fw-bold"
-                                style="background-color: orange; color: white;" onclick="DeliveryApp.goToCheckout()">
+                                style="background-color: orange; color: white;" >
                                 THANH TOÁN
                             </button>
                         </div>
@@ -407,13 +392,21 @@
 
             goToCheckout: function () {
                 let address = document.getElementById("delivery-address").value;
+
+                // Kiểm tra đã nhập địa chỉ chưa
                 if (address.trim() === "") {
                     alert("Vui lòng nhập địa chỉ giao hàng trước khi thanh toán!");
                     return;
                 }
-                this.saveDeliveryDetails(); // Chốt lưu địa chỉ
-                this.saveCart();            // Chốt lưu giỏ hàng
-                window.location.href = "checkout.html"; // Qua trang thanh toán
+
+                // 1. Lưu địa chỉ vào localStorage
+                localStorage.setItem("deliveryAddress", address);
+
+                // 2. Lưu giỏ hàng với key là "cart" để trang checkout.html có thể đọc được
+                localStorage.setItem("cart", JSON.stringify(this.cart));
+
+                // 3. Chuyển sang trang thanh toán
+                window.location.href = "checkout.html";
             },
 
             // lưu địa chỉ + thời gian

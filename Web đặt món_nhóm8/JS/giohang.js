@@ -41,7 +41,7 @@ const CartPage = {
             container.innerHTML = `
                 <div class="text-center py-5">
                     <h5>Giỏ hàng trống</h5>
-                    <a href="menu.html" class="btn btn-primary">Đi chọn món</a>
+                    <a href="menu.html" class="btn btn-secondary">Đi chọn món</a>
                 </div>
             `;
             totalEl.innerText = "0đ";

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <script src="../JS/bootstrap.bundle.min.js"></script>
     <script src="../JS/jquery-4.0.0.min.js"></script>
+    <script src="../JS/signIn_signUp.js"></script>
+    <script src="../JS/toilay.js"></script>
 </head>
 
 <body>
@@ -17,14 +19,14 @@
             <div class="container">
 
                 <div>
-                    <a href="#"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
+                    <a href="index.html"><img src="../IMG/HomePage/logo_web.png" alt="Logo Web" id="logo_web"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav me-auto mt-2 mt-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="home.html" aria-current="page">Trang Chủ
+                            <a class="nav-link active" href="index.html" aria-current="page">Trang Chủ
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -33,7 +35,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Khuyến Mãi</a>
+                            <a class="nav-link" href="khuyenmai.html">Khuyến Mãi</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -41,7 +43,7 @@
                                 aria-haspopup="true" aria-expanded="false">Dịch Vụ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="dattiec.html">Đặt Tiệc</a>
-                                <a class="dropdown-item" href="#" onclick="selectService('pickup')">Tới Lấy</a>
+                                <a class="dropdown-item" href="#">Tới Lấy</a>
                                 <a class="dropdown-item" href="giaohang.html">Giao Hàng</a>
                                 <a class="dropdown-item" href="#">Ăn Tại Chỗ</a>
                             </div>
@@ -109,7 +111,6 @@
         </div>
 
         <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
-        <!-- khi ấn vào icon người dùng nó sẽ thực hiện cái modal button này để hiện ra pop up đăng nhâp/đăng ký -->
         <div class="modal fade" id="authModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -156,138 +157,57 @@
             </div>
         </div>
 
-        <!-- script kiểm tra thông tin đăng nhập có hợp lệ không -->
-        <script>
-            $(document).ready(function () {
+        <div class="container my-4">
+            <h2 class="text-center fw-bold text-uppercase mb-4" style="color: #7d2905;">Dịch vụ Tới Lấy</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-3 border-bottom pb-2">1. THÔNG TIN NHẬN MÓN</h6>
+                        <p class="small mb-1"><strong>Địa chỉ lấy hàng:</strong></p>
+                        <p class="text-muted small mb-4">📍 1 Nguyễn Văn Bảo, Gò Vấp, TP.HCM</p>
 
-                $("#userIcon").click(function () {
-                    var currentUser = localStorage.getItem("currentUser");
-                    if (!currentUser) {
-                        //  chưa login → mở modal
-                        $("#authModal").modal("show");
-                    } else {
-                        //  đã login → hỏi đăng xuất
-                        if (confirm("Bạn có muốn đăng xuất không?")) {
-                            localStorage.removeItem("currentUser");
-                            alert("Đã đăng xuất!");
-                        }
-                    }
-                });
+                        <p class="fw-bold small mb-2">Thời gian bạn tới lấy</p>
+                        <select id="pickup-time" class="form-select form-select-sm mb-3">
+                            <option value="Sau 15 phút">Sau 15 phút</option>
+                            <option value="Sau 30 phút">Sau 30 phút</option>
+                            <option value="Sau 1 tiếng">Sau 1 tiếng</option>
+                            <option value="Khác">Hẹn giờ khác</option>
+                        </select>
 
-                $("#showRegister").click(function (e) {
-                    e.preventDefault();
-                    $("#helpRegister").hide();
-                    $("#loginName, #pwd, #btnLogin").hide();
-                    $("#loginError, #pwdError").hide();
-                    $("#registerForm").show();
-                    $("#modalTitle").text("Đăng ký")
-                });
+                        <div class="alert alert-info small">
+                            Tiết kiệm <strong>15.000đ</strong> phí vận chuyển khi tới lấy trực tiếp!
+                        </div>
+                    </div>
+                </div>
 
-                $("#showLogin").click(function (e) {
-                    e.preventDefault();
-                    $("#loginName, #pwd, #btnLogin").show();
-                    $("#loginError, #pwdError").show();
-                    $("#helpRegister").show();
-                    $("#modalTitle").text("Đăng nhập")
-                    $("#registerForm").hide();
-                });
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-2">2. CHỌN MÓN ĂN</h6>
+                        <div id="menu-list" class="row g-3 overflow-auto" style="max-height: 500px;">
+                        </div>
+                    </div>
+                </div>
 
-                $("#btnLogin").click(function (e) {
-                    e.preventDefault();
-                    var loginName = ($("#loginName").val());
-                    var pwd = ($("#pwd").val());
-                    $("#loginError").text("");
-                    $("#pwdError").text("");
-                    if (loginName == "") {
-                        $("#loginError").text("Không được để trống!");
-                        return;
-                    } else if (pwd == "") {
-                        $("#pwdError").text("Không được để trống!");
-                        return;
-                    } else {
-                        var user = JSON.parse(localStorage.getItem("user"));
+                <div class="col-lg-3">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-2">3. ĐƠN HÀNG</h6>
+                        <div id="cart-container" class="flex-grow-1 overflow-auto mb-4" style="max-height: 300px;">
+                        </div>
 
-                        if (!user || user.username !== loginName || user.password !== pwd) {
-                            $("#pwdError").text("Sai tài khoản hoặc mật khẩu!");
-                            return;
-                        }
-
-                        //  login thành công
-                        localStorage.setItem("currentUser", loginName);
-
-                        alert("Đăng nhập thành công!");
-                        $("#authModal").modal("hide");
-                    }
-                });
-
-                $("#btnRegister").click(function (e) {
-                    e.preventDefault();
-                    var regRegisterName = /^[A-Za-z\d]+$/;
-                    var regRegisterPWD = /^(?=.*[A-Z]).{8,}$/;
-
-                    var registerName = ($("#registerName").val());
-                    var registerPWD = ($("#registerPWD").val());
-                    var registerRePWD = ($("#registerRePWD").val());
-                    $("#registerError").text("");
-                    $("#registerPWDError").text("");
-                    $("#RePWDError").text("");
-                    if (registerName == "") {
-                        $("#registerError").text("Không được để trống!");
-                        return;
-                    } else if (registerPWD == "") {
-                        $("#registerPWDError").text("Không được để trống!");
-                        return;
-                    } else if (registerRePWD == "") {
-                        $("#RePWDError").text("Không được để trống!");
-                        return;
-                    } else {
-                        if (!regRegisterName.test(registerName)) {
-                            $("#registerError").text("Tên đăng nhập không được chứa ký tự đặc biệt!");
-                            return;
-                        } else if (!regRegisterPWD.test(registerPWD)) {
-                            $("#registerPWDError").text("Mật khẩu phải có độ dài tối thiểu là 8 ký tự và có ít nhất 1 chữ in hoa!");
-                            return;
-                        } else if (registerRePWD != registerPWD) {
-                            $("#RePWDError").text("Không khớp với mật khẩu!");
-                            return;
-                        }
-                    }
-
-                    //  lưu tài khoản
-                    var user = {
-                        username: registerName,
-                        password: registerPWD
-                    };
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    //  lưu trạng thái đang đăng nhập luôn
-                    localStorage.setItem("currentUser", registerName);
-
-                    alert("Đăng ký thành công!");
-
-                    // đóng modal
-                    $("#authModal").modal("hide");
-                });
-
-                var currentUser = localStorage.getItem("currentUser");
-
-                if (currentUser) {
-                    console.log("Đang đăng nhập:", currentUser);
-                }
-
-            });
-
-            $('#authModal').on('show.bs.modal', function () {
-                $(this).find("input").val("");
-                $(this).find("span").text("");
-                $("#registerForm").hide();
-                $("#loginName, #pwd, #btnLogin").show();
-                $("#helpRegister").show();
-                $("#modalTitle").text("Đăng nhập");
-            });
-
-
-        </script>
+                        <div class="border-top pt-3">
+                            <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                                <span>Tổng cộng:</span>
+                                <span class="text-success" id="total-price">0đ</span>
+                            </div>
+                            <button class="btn w-100 py-2 fw-bold" style="background-color: orange; color: white;"
+                                onclick="PickupApp.goToCheckout()">
+                                XÁC NHẬN ĐƠN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <footer class="py-4 mt-5 bg-dark text-light">
             <div class="container" style="text-align: left;">
